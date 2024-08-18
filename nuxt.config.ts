@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  pages: true,
   runtimeConfig: {
     public: {
       axiosBaseUrl: process.env.API_BASE_URL,
@@ -14,7 +15,7 @@ export default defineNuxtConfig({
       "@pinia/nuxt",
   ],
   plugins: [
-    '~/plugins/axios.js',
+    '~/plugins/axios',
     '~/plugins/toast.js',
   ],
   i18n: {
@@ -22,4 +23,5 @@ export default defineNuxtConfig({
       locales: ['en', 'ar'],
       defaultLocale: 'en',
   },
+
 })

@@ -42,13 +42,13 @@ function onClick() {
   }
 }
 
-import { useUserStore} from "~/store/users.js";
+import { useUserStore} from "~/store/users";
 
 const userStore = useUserStore();
-await useAsyncData('user-data',
-    () => userStore.fetchUserData())
-const { data, pending, error } = await useAsyncData('user-data',
-    () => userStore.fetchUserData());
+
+const { data, pending, error } =
+    useAsyncData('user-data', () => userStore.fetchUserData());
+
 
 
 </script>

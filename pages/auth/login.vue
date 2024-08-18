@@ -21,7 +21,9 @@
                   required></UInput>
         </div>
         <div class="mb-2.5">
-          <UButton :loading="LoginStoreData.loading" type="submit" block>Button</UButton>
+          <UButton :loading="LoginStoreData.loading" type="submit" block>
+            {{ $t('login.submit') }}
+          </UButton>
         </div>
       </form>
     </div>
