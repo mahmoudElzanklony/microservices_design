@@ -1,6 +1,5 @@
 // plugins/axios.js
 import axios from 'axios';
-import cookie from 'cookie';
 
 export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig();
@@ -16,15 +15,17 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     // Optional: Add interceptors for request/response
     axiosInstance.interceptors.request.use((config) => {
+
         if (process.server) {
             const req = useRequestHeaders();
             let token = req.cookie?.token;
+            let lang = req.cookie?.i18n_redirected;
             try{
                 token = req.cookie.split('token=')[1]
-                console.log('------token-----')
-                console.log(req.cookie.split('token=')[1])
+                lang = req.cookie.split('i18n_redirected=')[1].split(';')[0]
                 if (token) {
                     config.headers.Authorization = `Bearer ${token}`;
+                    config.headers.lang = lang;
                 }
             }catch (e){
                 console.log(e)
@@ -33,9 +34,14 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 
         } else if (process.client) {
-            const token = document.cookie.split('; ').find(row => row.startsWith('token='));
+            const token = document.cookie.split('; ')
+                .find(row => row.startsWith('token='));
+            const lang = document.cookie.split('; ')
+                .find(row => row.startsWith('i18n_redirected='));
+
             if (token) {
                 config.headers.Authorization = `Bearer ${token.split('=')[1]}`;
+                config.headers.lang = lang?.split('=')[1]
             }
         }
         return config;
@@ -51,6 +57,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
         return response;
     }, (error) => {
+        if(error?.response?.data?.message.indexOf('Unauthenticated') >= 0){
+            const router = useRouter();
+            router.push('/auth/login');
+        }
         const Toast = nuxtApp.$Toast;
         if(error?.response?.data?.errors) {
             Toast.error(error.response.data.errors);

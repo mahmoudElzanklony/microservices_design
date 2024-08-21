@@ -31,7 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import {LoginStore} from "~/store/auth/login";
+import {LoginStore} from "../../store/auth/login";
+
 const LoginStoreData = LoginStore()
 console.log(LoginStoreData)
 definePageMeta({

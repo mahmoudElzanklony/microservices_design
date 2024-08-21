@@ -16,7 +16,8 @@ export default defineNuxtConfig({
   ],
   plugins: [
     '~/plugins/axios',
-    '~/plugins/toast.js',
+    '~/plugins/toast',
+    '~/plugins/auth'
   ],
   i18n: {
     vueI18n: './i18n.config.ts',

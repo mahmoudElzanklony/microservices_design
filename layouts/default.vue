@@ -1,28 +1,14 @@
 <template>
-  <UVerticalNavigation :links="links" />
+  <div class="flex">
+    <NavbarComponent class="w-fit md:w-[300px] bg-gray-50 p-4 border-e h-screen flex flex-col justify-between pb-8"></NavbarComponent>
+    <div class="content w-full max-h-screen overflow-y-scroll">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n();
-const links = [{
-  label: t('navbar.home'),
-  avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-  },
-  badge: 100
-}, {
-  label: 'Installation',
-  icon: 'i-heroicons-home',
-  to: '/'
-}, {
-  label: 'Vertical Navigation',
-  icon: 'i-heroicons-chart-bar',
-  to: '/'
-}, {
-  label: 'Command Palette',
-  icon: 'i-heroicons-command-line',
-  to: '/'
-}]
+
 </script>
 
 
