@@ -7,21 +7,13 @@
       <ul class="flex items-center">
         <li>
           <UButton
+              class="mx-3"
               icon="i-heroicons-plus"
               size="lg"
               color="primary"
               variant="solid"
-              @click="isOpen = true"
+              @click="isOpenForModal = true; edited_row = {}"
               :label="$t('general.add_item')"
-              :trailing="false"
-          />
-          <UButton
-              class="mx-3"
-              icon="i-heroicons-pencil-square"
-              size="lg"
-              color="blue"
-              variant="solid"
-              :label="$t('general.edit')"
               :trailing="false"
           />
           <UButton
@@ -56,7 +48,7 @@
     </UTable>
     <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
       <UPagination v-model="page"
-                   :pageCount="1"
+                   :pageCount="10"
                    :total="store.data?.meta?.total" />
     </div>
 
@@ -64,26 +56,32 @@
                       :table="table"
                       :id="deleted_ids"
                       :is-open="isOpen"></DeleteBoxComponent>
+
+  <ModalBoxComponent @update:isOpen="closeModal"
+                     :edited_row="edited_row"
+                     :is-open="isOpenForModal"
+                     :inputs="modal_inputs"></ModalBoxComponent>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import ModalBox from "./ModalBoxComponent.vue";
 import FilterTable from "../dom/FilterTable";
 // define variables
-let props = defineProps(['title','columns','table','store_name','row_actions'])
+let props = defineProps(['title','columns','modal_inputs','table','store_name','row_actions'])
 //---------------- start of store------------
 let store = props.store_name()
 await store.get_data_action();
 
 //---------------- end of store------------
 const filterString = ref(''); // for filter inputs
-let isOpen = ref(false); // for modal pop up
+let isOpen = ref(false); // for delete modal pop up
+let isOpenForModal = ref(false); // for edit modal pop up
+let edited_row = reactive({})
 const selected = ref([store.data?.data.length > 0 ? store.data?.data[0] : '' ])
 // for pagination table
 const page = ref(1)
 watch(() => page.value, async (newVal) => {
-  console.log(newVal)
   await store.get_data_action(filterString.value.length < 3 ? '?page='+page.value:filterString.value+'&page='+page.value);
 });
 
@@ -110,12 +108,21 @@ let deleted_ids = []
 
 
 
-const handleDelete = (id) => {
-  deleted_ids[0] = id;
-  isOpen.value = true;
+const handleDelete = (row:id|object,type:string) => {
+  console.log(row)
+  console.log(type)
+  if(type == 'edit'){
+    isOpenForModal.value = true;
+    edited_row = row
+  }else{
+    isOpen.value = true;
+    deleted_ids[0] = row;
+  }
+
 };
 const closeModal = () => {
   isOpen.value = false;
+  isOpenForModal.value = false
 }
 // Actions function with emit
 

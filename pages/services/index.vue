@@ -4,6 +4,7 @@
       <TableComponent
           :title="$t('navbar.services')"
           :columns="columns"
+          :modal_inputs="box_inputs"
           table="services"
           :row_actions="ActionsTable"
           :store_name="ServicesStore"
@@ -23,18 +24,14 @@
 
 <script setup lang="ts">
 import createTableColumns from "./table_columns";
-import FilterTable from "../../dom/FilterTable";
-import ModalBox from "../../components/ModalBoxComponent.vue";
+import createModalBoxColumns from "./modal_box_columns";
 import {ServicesStore } from "../../store/services";
 import ActionsTable from "../../fixed_data/ActionsTable";
 
-import {onMounted} from "vue";
 const { t } = useI18n();
 
-
-
-
 const columns = createTableColumns(t)
+const box_inputs = createModalBoxColumns(t)
 
 
 </script>

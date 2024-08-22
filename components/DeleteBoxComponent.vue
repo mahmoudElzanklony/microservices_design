@@ -27,7 +27,7 @@
               variant="solid"
               :label="t('general.accept')"
               :trailing="false"
-              @click="store.delete_action()"
+              @click="delete_item"
           />
           <UButton
               icon="i-heroicons-x-mark"
@@ -54,7 +54,7 @@ const props = defineProps({
   id: Array as PropType<number[]>
 });
 let store = DeleteStore();
-console.log('ids------------',props.id)
+
 store.data = {
   table:props?.table,
   id:props?.id
@@ -73,5 +73,9 @@ function closeModal() {
   status.value = false;
 }
 
+async function delete_item(){
+  await store.delete_action(props?.table)
+  closeModal()
+}
 
 </script>

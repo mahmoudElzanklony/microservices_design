@@ -5,6 +5,7 @@ export default defineI18nConfig(() => ({
         ar:{
             general:{
               save:'حفظ',
+              save_txt:'حفظ البيانات',
               edit:'تعديل',
               add_item:'اضافة عنصر',
               delete:'مسح',
@@ -19,6 +20,8 @@ export default defineI18nConfig(() => ({
                 created_at:'التاريخ',
                 email:'البريد الالكتروني',
                 password:'كلمة المرور',
+                username:'اسم المستخدم',
+                phone:'رقم الهاتف',
             },
             navbar:{
                 home:'الرئيسية',
@@ -35,6 +38,13 @@ export default defineI18nConfig(() => ({
             login:{
               submit:'تسجيل دخول',
               logout:'تسجيل خروج',
+              dont_have_acc:'لا تمتلك حساب',
+              register_here:'تسجيل مستخدم جديد من هنا',
+            },
+            register:{
+                submit:'تسجيل مستخدم جديد',
+                have_acc:'هل تمتلك بالفعل حساب ؟',
+                login_here:'تسجيل الدخول من هنا',
             },
             services:{
               main_title:'العنوان الرئيسي' ,
@@ -49,6 +59,7 @@ export default defineI18nConfig(() => ({
         en: {
             general:{
                 save:'Save',
+                save_txt:'Save data',
                 edit:'Edit',
                 add_item:'Add item',
                 delete:'Delete',
@@ -60,6 +71,8 @@ export default defineI18nConfig(() => ({
                 created_at:'Date',
                 email:'Email',
                 password:'Password',
+                username:'Username',
+                phone:'Phone',
             },
             search:{
                 name:'Search by name'
@@ -79,6 +92,13 @@ export default defineI18nConfig(() => ({
             login:{
                 submit:'Login',
                 logout:'Logout',
+                dont_have_acc:'Don\'t have an account ?',
+                register_here:'register from here',
+            },
+            register:{
+                submit:'Register',
+                have_acc:'Do you already have an account ?',
+                login_here:'login from here',
             },
 
             services:{

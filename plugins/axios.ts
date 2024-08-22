@@ -38,9 +38,11 @@ export default defineNuxtPlugin((nuxtApp) => {
                 .find(row => row.startsWith('token='));
             const lang = document.cookie.split('; ')
                 .find(row => row.startsWith('i18n_redirected='));
-
+            config.headers.mix = true; // for get data with all lang and data that put at table
             if (token) {
                 config.headers.Authorization = `Bearer ${token.split('=')[1]}`;
+            }
+            if(lang){
                 config.headers.lang = lang?.split('=')[1]
             }
         }
@@ -57,14 +59,24 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
         return response;
     }, (error) => {
-        if(error?.response?.data?.message.indexOf('Unauthenticated') >= 0){
+        const Toast = nuxtApp.$Toast;
+        if(error?.response?.data && error?.response?.data.hasOwnProperty('message') &&  error?.response?.data.message.indexOf('Unauthenticated') >= 0){
             const router = useRouter();
             router.push('/auth/login');
         }
-        const Toast = nuxtApp.$Toast;
-        if(error?.response?.data?.errors) {
-            Toast.error(error.response.data.errors);
+        if(typeof error?.response?.data?.errors == 'string'){
+            Toast.error(error?.response?.data?.errors)
+        }else{
+            if(error?.response?.data?.errors) {
+                console.log(error?.response?.data?.errors)
+                if(typeof error?.response?.data?.errors === 'object' && error?.response?.data?.errors !== null){
+                    for(let err of Object.values(error?.response?.data?.errors)){
+                        Toast.error(err[0])
+                    }
+                }
+            }
         }
+
         return Promise.reject(error);
     });
 

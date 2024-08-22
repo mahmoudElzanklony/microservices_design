@@ -1,17 +1,17 @@
 
 
-export default function (row , onDelete) {
+export default function (row , handlePopUp) {
     const { t } = useI18n();
 
     return [
         [{
             label: t('general.edit'),
             icon: 'i-heroicons-pencil-square-20-solid',
-            click: () => console.log('Edit', row.id)
+            click: () => handlePopUp(row , 'edit')
         }], [{
             label: t('general.delete'),
             icon: 'i-heroicons-trash-20-solid',
-            click: () =>onDelete(row.id)
+            click: () =>handlePopUp(row?.id , 'delete')
         }]
     ]
 }

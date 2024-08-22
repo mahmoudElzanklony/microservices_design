@@ -25,6 +25,7 @@
           color="primary"
           variant="outline"
           :label="$t('login.logout')"
+          @click="store.logout"
           :trailing="false"
       />
     </div>
@@ -32,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-
+import {LoginStore} from "../store/auth/login";
+let store = LoginStore()
 import ImageServerComponent from "./ImageServerComponent.vue";
 
 const { $auth } = useNuxtApp()
@@ -64,6 +66,7 @@ const links = [
     to: '/clients'
   }
 ]
+
 </script>
 
 

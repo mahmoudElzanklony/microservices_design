@@ -32,15 +32,16 @@ export const LoginStore = defineStore('login', {
             }
         },
         async logout() {
-            const { $axiosInstance } = useNuxtApp();
+            const { $axios } = useNuxtApp();
             try {
-                await $axiosInstance.post('/logout');
+                await $axios.post('/auth/logout');
 
                 // Remove token cookie
                 document.cookie = 'user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
                 document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
 
                 this.userData = null;
+                navigateTo('/auth/login')
             } catch (error) {
                 console.error('Logout failed:', error);
             }

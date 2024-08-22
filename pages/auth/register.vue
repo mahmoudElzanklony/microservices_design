@@ -4,7 +4,14 @@
       <div class="w-full">
         <img class="w-1/2 m-auto" src="/images/logo.png">
       </div>
-      <form method="post" @submit.prevent="LoginStoreData.login">
+      <form method="post" @submit.prevent="store.register">
+        <div class="mb-2.5">
+          <label>{{ $t('general_inputs.username') }}</label>
+          <UInput name="username"
+                  icon="i-heroicons-user"
+                  size="sm"
+                  required></UInput>
+        </div>
         <div class="mb-2.5">
           <label>{{ $t('general_inputs.email') }}</label>
           <UInput name="email"
@@ -21,13 +28,21 @@
                   required></UInput>
         </div>
         <div class="mb-2.5">
-          <UButton :loading="LoginStoreData.loading" type="submit" block>
-            {{ $t('login.submit') }}
+          <label>{{ $t('general_inputs.phone') }}</label>
+          <UInput name="phone"
+                  type="number" min="1"
+                  icon="i-heroicons-phone"
+                  size="sm"
+                  required></UInput>
+        </div>
+        <div class="mb-2.5">
+          <UButton :loading="store.loading" type="submit" block>
+            {{ $t('register.submit') }}
           </UButton>
         </div>
         <div class="flex justify-between">
-          <p>{{ $t('login.dont_have_acc') }}</p>
-          <nuxt-link to="/auth/register" class="text-primary">{{ $t('login.register_here') }}</nuxt-link>
+          <p>{{ $t('register.have_acc') }} </p>
+          <nuxt-link to="/auth/login" class="text-primary">{{ $t('register.login_here') }}</nuxt-link>
         </div>
       </form>
     </div>
@@ -35,14 +50,13 @@
 </template>
 
 <script setup lang="ts">
-import {LoginStore} from "../../store/auth/login";
+import {RegisterStore} from "../../store/auth/register";
 
-const LoginStoreData = LoginStore()
-
+const store = RegisterStore()
 definePageMeta({
   layout: false,
   head: {
-    title: 'Login | تسجيل دخول'
+    title: 'Register | تسجيل مستخدم جديد'
   }
 })
 </script>
