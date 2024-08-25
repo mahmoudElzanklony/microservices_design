@@ -1,5 +1,6 @@
 // stores/user.ts
 import { defineStore } from 'pinia';
+import BaseStore from "./BaseStore";
 
 interface DataInterface {
     id: number;
@@ -13,34 +14,24 @@ interface DataInterface {
     created_at: string;
 }
 
-interface State {
-    data: DataInterface | null;
-    loading: boolean;
-    error: Error | null;
-}
 
 export const ServicesStore = defineStore('services', {
-    state: (): State => ({
-        data: null,
-        loading: false,
-        error: null,
+    state: () => ({
+        ...new BaseStore<DataInterface>().state,
+        loading:false
     }),
 
     actions: {
         async get_data_action(filters = '') {
-            const { $axios } = useNuxtApp();
-
             this.loading = true;
-
-            try {
-                const response = await $axios.get<{ data: State }>('/services'+filters);
-                this.data = response.data;
-
-            } catch (error) {
-                this.error = error as Error;
-            } finally {
-                this.loading = false;
-            }
+            this.data = await new BaseStore<DataInterface>().get_data_action('/services',filters)
+            this.loading = false;
+        },
+        async save_action(data:FormData) {
+            this.loading = true;
+            await  await new BaseStore<DataInterface>().save_action('/services',data)
+            this.data = await new BaseStore<DataInterface>().get_data_action('/services','')
+            this.loading = false;
         },
 
 

@@ -11,9 +11,13 @@ export default defineI18nConfig(() => ({
               delete:'مسح',
               accept:'موافق',
               cancel:'الغاء',
+              start_date:'بدايه الفتره الزمنية',
+              end_date:'نهاية الفتره الزمنية',
+              no_data:'لا يوجد بيانات'
             },
             search:{
-              name:'ابحث بالاسم'
+              name:'ابحث بالاسم',
+              by:'أبحث عن طريق ',
             },
             general_inputs:{
                 name:'الاسم',
@@ -22,6 +26,9 @@ export default defineI18nConfig(() => ({
                 password:'كلمة المرور',
                 username:'اسم المستخدم',
                 phone:'رقم الهاتف',
+                ar_name:'الاسم بالعربي',
+                en_name:'الاسم بالانجليزي',
+
             },
             navbar:{
                 home:'الرئيسية',
@@ -47,12 +54,36 @@ export default defineI18nConfig(() => ({
                 login_here:'تسجيل الدخول من هنا',
             },
             services:{
+              name:'الاسم',
               main_title:'العنوان الرئيسي' ,
               sub_title:'العنوان الفرعي' ,
               ar_main_title:'العنوان الرئيسي بالعربي' ,
               en_main_title:'العنوان الرئيسي بالانجليزي' ,
               ar_sub_title:'العنوان الفرعي بالعربي' ,
               en_sub_title:'العنوان الفرعي بالانجليزي' ,
+            },
+            sections:{
+              visibility:'امكانية الظهور',
+              public:'متاحه للجميع',
+              private:'خاصة بي'
+            },
+            attributes:{
+                label:'الوسم',
+                placeholder:'التوضيح الذي يكتب في حقل الادخال',
+                ar_label:'اسم الوسم بالعربي',
+                en_label:'اسم الوسم بالانجليزي',
+                ar_placeholder:'التوضيح الذي يكتب في حقل الادخال بخط رمادي بالعربي',
+                en_placeholder:'التوضيح الذي يكتب في حقل الادخال بخط رمادي بالانجليزي',
+                icon:'الايقون',
+                icon_txt:'ضع ايقون مناسبة لحقل الادخال يمكنك اضافه كود الايقون من خلال هذا الرابط https://icones.js.org/collection/heroicons مثال علي الايقون (academic-cap)',
+                type:'النوع',
+                text:'نص',
+                textarea:'نص كبير',
+                date:'تاريخ',
+                checkbox:'مربع اختيار',
+                select:'اختر من متعدد',
+                options:'الاختيارات',
+                file:'ملف',
             },
             welcome:'مرحبا',
         },
@@ -64,7 +95,11 @@ export default defineI18nConfig(() => ({
                 add_item:'Add item',
                 delete:'Delete',
                 accept:'Accept',
-                cancel:'Cancel'
+                cancel:'Cancel',
+                start_date:'Start date',
+                end_date:'End date',
+                no_data:'No data'
+
             },
             general_inputs:{
                 name:'Name',
@@ -73,9 +108,13 @@ export default defineI18nConfig(() => ({
                 password:'Password',
                 username:'Username',
                 phone:'Phone',
+                ar_name:'Name in arabic',
+                en_name:'Name in english',
+
             },
             search:{
-                name:'Search by name'
+                name:'Search by name',
+                by:'Search by ',
             },
             delete:{
                 text:'Are you sure from delete process',
@@ -100,14 +139,37 @@ export default defineI18nConfig(() => ({
                 have_acc:'Do you already have an account ?',
                 login_here:'login from here',
             },
-
             services:{
+                name:'Name',
                 main_title:'Main title' ,
                 sub_title:'Sub title' ,
                 ar_main_title:'Main title in arabic' ,
                 en_main_title:'Main title in english' ,
                 ar_sub_title:'Sub title in arabic' ,
                 en_sub_title:'Sub title in english' ,
+            },
+            sections:{
+                visibility:'Visibility',
+                public:'Public',
+                private:'Private',
+            },
+            attributes:{
+                label:'Label',
+                placeholder:'Placeholder',
+                ar_label:'Label in arabic',
+                en_label:'Label in english',
+                ar_placeholder:'text that put at input to explain input in arabic',
+                en_placeholder:'text that put at input to explain input in english',
+                icon:'Icon',
+                type:'Type',
+                text:'Text',
+                textarea:'Big text area',
+                date:'Date',
+                checkbox:'Checkbox',
+                select:'Select',
+                options:'Options',
+                file:'File',
+                icon_txt:'put icon for input field you can use this link to put code icon https://icones.js.org/collection/heroicons example for icon code (academic-cap)',
             },
             welcome: 'Welcome'
         },

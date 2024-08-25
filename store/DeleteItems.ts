@@ -1,6 +1,6 @@
 // stores/user.ts
 import { defineStore } from 'pinia';
-
+import dynamic_import from "../mixins/dynamic_import";
 interface DataInterface {
     id: number[];
     table: string;
@@ -20,15 +20,14 @@ export const DeleteStore = defineStore('delete', {
     }),
 
     actions: {
-        async delete_action(table) {
+        async delete_action(table:string) {
             const { $axios } = useNuxtApp();
             this.loading = true;
             try {
                 let formData = new FormData();
                 formData.append('table',this.data?.table)
                 formData.append('id[]',this.data?.id)
-                const storeModule = await import(`./${table}.ts`);
-                const store = storeModule[(table[0].toUpperCase() + table.slice(1))+'Store']()
+                const store = await dynamic_import(table)
 
                 const response = await $axios.post('/deleteitem',formData);
                 store.get_data_action()

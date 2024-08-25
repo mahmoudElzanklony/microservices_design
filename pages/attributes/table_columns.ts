@@ -7,19 +7,31 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
             sortable: true
         },
         {
-            label: t('services.main_title'),
-            key: 'main_title',
+            label: t('attributes.label'),
+            key: 'label',
             sortable: true
         },
         {
-            label: t('services.sub_title'),
-            key: 'sub_title',
+            label: t('attributes.placeholder'),
+            key: 'placeholder',
             sortable: true
         },
         {
-            label: t('general_inputs.created_at'),
-            key: 'created_at',
+            label: t('sections.visibility'),
+            key: 'visibility',
             sortable: true
+        },
+        {
+            label: t('attributes.type'),
+            key: 'type',
+            sortable: true
+        },
+        {
+            label: t('attributes.icon'),
+            key: 'icon',
+        },
+        {
+            key: 'actions'
         }
     ];
 }

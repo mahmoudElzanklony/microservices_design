@@ -4,6 +4,7 @@
       <TableComponent
           :title="$t('navbar.services')"
           :columns="columns"
+          :data_row_relations="[]"
           :modal_inputs="box_inputs"
           table="services"
           :row_actions="ActionsTable"
@@ -11,9 +12,26 @@
 
       >
         <template #filters>
-          <form>
-            <div class="flex search-input px-3 py-3.5 border-b border-gray-200 ">
-              <UInput name="name"  :placeholder="$t('search.name')" />
+          <form class="flex space-x-2">
+            <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
+              <label class="block w-100">{{ $t('services.name') }}</label>
+              <UInput name="name"  :placeholder="$t('search.by')+$t('services.name')" />
+            </div>
+            <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
+              <label class="block w-100">{{ $t('services.main_title') }}</label>
+              <UInput name="main_title"  :placeholder="$t('search.by')+$t('services.main_title')" />
+            </div>
+            <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
+              <label class="block w-100">{{ $t('services.sub_title') }}</label>
+              <UInput name="sub_title"  :placeholder="$t('search.by')+$t('services.sub_title')" />
+            </div>
+            <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
+              <label class="block w-100">{{ $t('general.start_date') }}</label>
+              <UInput name="start_date" type="date" />
+            </div>
+            <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
+              <label class="block w-100">{{ $t('general.end_date') }}</label>
+              <UInput name="end_date" type="date" />
             </div>
           </form>
 

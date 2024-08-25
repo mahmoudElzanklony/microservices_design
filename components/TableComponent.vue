@@ -40,6 +40,17 @@
         v-model="selected"
         sort-mode="manual"
     >
+
+      <template v-for="i in data_row_relations"  v-slot:[`${i[0]}-data`] = {row} >
+        <UBadge  color="black" v-if="row[i[0]].length == 0">{{ $t('general.no_data') }}</UBadge>
+        <UBadge size="sm" :class="key > 0 ? 'mx-1':'' " :key="key" v-for="(item,key) in row[i[0]]" :label="item[i[1]]" variant="subtle"></UBadge>
+      </template>
+      <template #icon-data="{ row }">
+        <div class="flex space-x-2 items-center">
+          <UBadge size="sm" class="text-xs p-1">{{ row?.icon }}</UBadge>
+          <Icon class="w-8 h-8" :name="'heroicons:'+row?.icon"></Icon>
+        </div>
+      </template>
       <template #actions-data="{ row }">
         <UDropdown :items="row_actions(row,handleDelete)">
           <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
@@ -60,6 +71,7 @@
   <ModalBoxComponent @update:isOpen="closeModal"
                      :edited_row="edited_row"
                      :is-open="isOpenForModal"
+                     :store="store"
                      :inputs="modal_inputs"></ModalBoxComponent>
 </template>
 
@@ -68,7 +80,7 @@ import {onMounted, reactive, ref, watch} from "vue";
 import ModalBox from "./ModalBoxComponent.vue";
 import FilterTable from "../dom/FilterTable";
 // define variables
-let props = defineProps(['title','columns','modal_inputs','table','store_name','row_actions'])
+let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','store_name','row_actions'])
 //---------------- start of store------------
 let store = props.store_name()
 await store.get_data_action();
@@ -87,7 +99,7 @@ watch(() => page.value, async (newVal) => {
 
 
 onMounted(async ()=>{
-  FilterTable('.search-input input',updateFilters)
+  FilterTable('.search-input input,.search-input select',updateFilters)
 })
 
 
