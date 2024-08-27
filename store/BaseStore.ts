@@ -28,6 +28,16 @@ export default class BaseStore <T>{
 
     }
 
+    async get_specific_one_action(end_point:string = '', filters:string = ''){
+        try{
+            const response = await this.axios.get<{data:T}>(end_point+filters)
+            return response?.data;
+        }catch (error){
+            this.state.error = error;
+        }
+
+    }
+
     async save_action(end_point:string = '',filters:FormData){
         try{
             const response = this.axios.post<{data:T}>(end_point,filters);

@@ -3,6 +3,9 @@ export default defineI18nConfig(() => ({
     locale: 'en',
     messages: {
         ar:{
+            errors:{
+                num_error_input:'القيمه العددية لا تستطيع ان تتخطي المأئه ولا تقل عن الصفر'
+            },
             general:{
               save:'حفظ',
               save_txt:'حفظ البيانات',
@@ -11,9 +14,11 @@ export default defineI18nConfig(() => ({
               delete:'مسح',
               accept:'موافق',
               cancel:'الغاء',
+              add_sec:'اضافة قسم جديد',
               start_date:'بدايه الفتره الزمنية',
               end_date:'نهاية الفتره الزمنية',
-              no_data:'لا يوجد بيانات'
+              no_data:'لا يوجد بيانات',
+              main_info:'المعلومات الاساسية'
             },
             search:{
               name:'ابحث بالاسم',
@@ -61,6 +66,18 @@ export default defineI18nConfig(() => ({
               en_main_title:'العنوان الرئيسي بالانجليزي' ,
               ar_sub_title:'العنوان الفرعي بالعربي' ,
               en_sub_title:'العنوان الفرعي بالانجليزي' ,
+              attributes_data:'حقول ادخال الخدمه',
+              style:{
+                main_titles:'العنواين الاساسية',
+                main_inputs:'حقول الادخال',
+                submit:'حقل ارسال البيانات',
+                color:'لون الخط',
+                margin:'المسافات',
+                font_size:'حجم خط حقول الادخال',
+                font_family:'نوع الخط',
+                width:'المساحة',
+                background_color:'لون الخلفية'
+              }
             },
             sections:{
               visibility:'امكانية الظهور',
@@ -68,6 +85,7 @@ export default defineI18nConfig(() => ({
               private:'خاصة بي'
             },
             attributes:{
+                attribute:'حقل ادخال',
                 label:'الوسم',
                 placeholder:'التوضيح الذي يكتب في حقل الادخال',
                 ar_label:'اسم الوسم بالعربي',
@@ -88,18 +106,22 @@ export default defineI18nConfig(() => ({
             welcome:'مرحبا',
         },
         en: {
+            errors:{
+                num_error_input:'value cant less than 0 or exceed 100'
+            },
             general:{
                 save:'Save',
                 save_txt:'Save data',
                 edit:'Edit',
+                add_sec:'Add new section',
                 add_item:'Add item',
                 delete:'Delete',
                 accept:'Accept',
                 cancel:'Cancel',
                 start_date:'Start date',
                 end_date:'End date',
-                no_data:'No data'
-
+                no_data:'No data',
+                main_info:'General info'
             },
             general_inputs:{
                 name:'Name',
@@ -147,6 +169,18 @@ export default defineI18nConfig(() => ({
                 en_main_title:'Main title in english' ,
                 ar_sub_title:'Sub title in arabic' ,
                 en_sub_title:'Sub title in english' ,
+                attributes_data:'Service Attributes Data',
+                style:{
+                    main_titles:'Main titles',
+                    main_inputs:'Main inputs',
+                    submit:'Submit Form input',
+                    color:'Font color',
+                    margin:'Margin',
+                    font_size:'Font size For inputs',
+                    font_family:'Font family',
+                    width:'Width',
+                    background_color:'Background Color'
+                }
             },
             sections:{
                 visibility:'Visibility',
@@ -154,6 +188,7 @@ export default defineI18nConfig(() => ({
                 private:'Private',
             },
             attributes:{
+                attribute:'Attribute',
                 label:'Label',
                 placeholder:'Placeholder',
                 ar_label:'Label in arabic',

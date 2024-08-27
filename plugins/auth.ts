@@ -9,7 +9,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         if(user) {
             user = req.cookie.split('; user=');
             if (user[1]) {
-                console.log('------user-----')
                 user = JSON.parse(user[1].split(';')[0]);
             }
         }
