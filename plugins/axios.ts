@@ -60,8 +60,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         return response;
     }, (error) => {
         const Toast = nuxtApp.$Toast;
+        const router = useRouter();
         if(error?.response?.data && error?.response?.data.hasOwnProperty('message') &&  error?.response?.data.message.indexOf('Unauthenticated') >= 0){
-            const router = useRouter();
+
             router.push('/auth/login');
         }
         if(typeof error?.response?.data?.errors == 'string'){
@@ -75,6 +76,10 @@ export default defineNuxtPlugin((nuxtApp) => {
                     }
                 }
             }
+        }
+
+        if(error?.response?.statusText == 'Unauthorized'){
+            router.push('/');
         }
 
         return Promise.reject(error);

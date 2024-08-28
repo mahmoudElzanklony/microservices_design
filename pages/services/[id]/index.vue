@@ -1,6 +1,7 @@
 <template>
   <ClientOnly>
-    <form class="p-6">
+    <form class="p-6" method="post"
+          @submit.prevent="save_data_service_style_fn">
     <div class="grid grid-cols-3 gap-7">
        <div>
          <UAccordion class="mb-3" :items="main_inputs_up_down">
@@ -33,6 +34,7 @@
                      @click="removeSec(index)" class="w-5 h-5 cursor-pointer" />
 
                </div>
+               <input type="hidden" v-if="i?.id" name="item_id[]" :value="i?.id">
                <div class="mb-2">
                  <USelectMenu
                      searchable
@@ -80,7 +82,7 @@
            </UButton>
          </div>
        </div>
-       <div class="simulation">
+       <div class="simulation" v-if="general_info">
           <div class="form flex flex-wrap">
              <h2 class="text-center text-3xl w-full"
                  >{{ general_info[locale + '_main_title'] }}</h2>
@@ -88,10 +90,11 @@
              <div class="input-data"  v-for="(i,index) in sections_attr_ids" :key="index">
                <label v-if="i?.section_id != null">{{ SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.label }}</label>
                <UInput v-if="i?.section_id != null"
+                   :type="SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.type"
                    :name="SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.name"
                    :icon="'i-heroicons-'+(SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.icon)"
                    size="sm"
-                   required></UInput>
+                   ></UInput>
              </div>
              <div class="input-submit">
                <button   type="button" >
@@ -105,6 +108,7 @@
            <StyleBoxItemServiceComponent
                @form_style_fn="handleFormStyle"
                :title="titles"
+               :styles="general_info?.style"
                :inputs="styles"></StyleBoxItemServiceComponent>
 
          </div>
@@ -120,110 +124,98 @@
   import {navigateTo,} from "nuxt/app";
   import {ServicesStore} from "../../../store/services";
   import {SectionsStore} from "../../../store/sections";
-  import {createFormInputs , createStyleInputs} from "./modal_box_columns";
-  import {computed, getCurrentInstance, reactive, ref, watch} from "vue";
+  import {reactive, watch} from "vue";
   import StyleBoxItemServiceComponent from "../../../components/StyleBoxItemServiceComponent.vue";
+  import { useFormManagement} from "../../../composables/services_style/useFormManagement";
+  import {useStyleManagement} from "../../../composables/services_style/useStyleManagement";
+  import {useTitlesStyles} from "../../../composables/services_style/useTitlesStyles";
+  import {useCheckServiceBelongToOwner} from "../../../composables/services_style/useCheckServiceBelongToOwner";
 
+  let { inputs, styles, main_inputs_up_down,sections_attr_ids, section_attributes_up_down,
+    fetchSections } = useFormManagement();
+  let {  titles} = useTitlesStyles()
+  const { handleFormStyle} = useStyleManagement();
+  let general_info = reactive({});
+  // get sections with attributes
+  await fetchSections();
+  let style_form_service_data = reactive({})
+  let {check_owner} = useCheckServiceBelongToOwner();
+
+
+
+
+  function addSection(){
+    sections_attr_ids.push({ id: null, section_id: null, attribute_id: null });
+  }
+
+  const removeSec = (index) => {
+    sections_attr_ids.splice(index, 1);
+  };
 
   // -----------end  of import---------------------
   // -----------start  of validation service id---------------------
-
+  const { locale, setLocale  } = useI18n()
   let router = useRoute();
   let serviceStore = ServicesStore()
   let SectionStore = SectionsStore()
-  const { locale, setLocale  } = useI18n()
 
-  if(router?.params?.id){
-     await serviceStore.get_specific_one(router?.params?.id)
 
-    if(!serviceStore.item){
-      navigateTo('/services')
-    }
-  }else{
-    navigateTo('/services')
-  }
-  let general_info = serviceStore?.item;
+
 
   // -----------end  of validation service id---------------------
   // -----------start  of declare form inputs---------------------
   const { t } = useI18n();
-  let inputs = createFormInputs(t)
-  let styles = createStyleInputs(t)
 
-  const main_inputs_up_down = [{
-    label: t('general.main_info'),
-    icon: 'i-heroicons-information-circle',
-    defaultOpen: true,
-    slot: 'service_info'
-  }]
-  const section_attributes_up_down = [{
-    label: t('services.attributes_data'),
-    icon: 'i-heroicons-rectangle-stack',
-    defaultOpen: false,
-    slot: 'attributes_info'
-  }]
+  if(router?.params?.id) {
+    //await serviceStore.get_specific_one(router?.params?.id)
+    await serviceStore.get_attr_sec_action(router?.params?.id);
 
-
-  await SectionStore.get_data_action('?ownership=true&limit=99999');
-  // -----------end  of declare form inputs---------------------
-  // -----------start  of declare sec attr reactive---------------------
-  let sections_attr_ids = reactive([{id:null,section_id:null,attribute_id:null}]);
-
-
-  const addSection = () => {
-    sections_attr_ids.push({ id:null,section_id: null, attribute_id: null })
-  }
-  const removeSec = (index) => {
-    sections_attr_ids.splice(index, 1)
-  }
-
-  // -----------end  of declare sec attr reactive---------------------
-
-  // --------------------start of style----------------------------
-  const titles = [{
-    label: t('services.style.main_titles'),
-    icon: 'i-heroicons-information-circle',
-    defaultOpen: true,
-    slot: 'main_titles'
-  },{
-    label: t('services.style.main_inputs'),
-    icon: 'i-heroicons-information-circle',
-    defaultOpen: false,
-    slot: 'main_inputs'
-  },{
-    label: t('services.style.submit'),
-    icon: 'i-heroicons-information-circle',
-    defaultOpen: false,
-    slot: 'submit'
-  }]
-  let style_form_service_data = reactive({})
-  const toStyleString = (obj) => {
-    return Object.entries(obj)
-
-        .map(([key, value]) => `${key}:${value}${key === 'width' ? '%':''}`)
-        .join(";");
-  };
-  function handleFormStyle(data){
-    style_form_service_data = data;
-    let main_titles_style = toStyleString(data?.main_titles || {});
-    let main_inputs_style = toStyleString(data?.main_inputs || {});
-    let submit = toStyleString(data?.submit || {});
-    // main titles
-    document.querySelector('.simulation h2').style.cssText = main_titles_style;
-    document.querySelector('.simulation h2:last-of-type').style.cssText = main_titles_style;
-    // main input
-    for(let input of document.querySelectorAll('.simulation .input-data')){
-      input.style.cssText = main_inputs_style
+    general_info = serviceStore?.item;
+    if (general_info?.style) {
+      style_form_service_data = general_info?.style
     }
-    // submit input
-    document.querySelector('.simulation .input-submit').style.cssText = submit;
+
+    if (general_info?.sec_attr_data?.length > 0) {
+      sections_attr_ids = general_info?.sec_attr_data
+    }
+
+    setTimeout(() => {
+      if (!general_info) {
+        navigateTo('/services')
+      }
+
+      check_owner()
+    }, 100)
   }
-  // watch changes when updated attr ids
-  watch(() => sections_attr_ids, (newVal) => {
-    handleFormStyle(style_form_service_data)
-  },{
-    deep:true
-  });
+
+
+
+
+    // --------------------start of style----------------------------
+
+
+    if (general_info?.style) {
+      handleFormStyle(general_info?.style, 500)
+    }
+    // watch changes when updated attr ids
+    watch(() => sections_attr_ids, (newVal) => {
+      handleFormStyle(style_form_service_data)
+    }, {
+      deep: true
+    });
+
+    // save style data
+    function save_data_service_style_fn() {
+      console.log('test--------------')
+      let data = new FormData(event.target);
+      console.log(data)
+      for (let i of sections_attr_ids) {
+        data.append('type[]', SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.type)
+      }
+      data.append('style', JSON.stringify(style_form_service_data));
+      data.append('service_id', router?.params?.id);
+      serviceStore.save_service_style_action(data);
+    }
 
   // --------------------end of style----------------------------
 
@@ -237,7 +229,7 @@
 .sec_attr{
   border-bottom: 1px solid #ddd;
 }
-.simulation{
+.simulation > div{
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;

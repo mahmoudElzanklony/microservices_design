@@ -50,6 +50,12 @@ export function createStyleInputs(t: ReturnType<typeof useI18n>['t']) {
                 options:[12,14,16,18,20,22,24,26,28,30,32,34,36,38,40].map((e)=> e+'px')
             },
             {
+                label: t('services.style.font_family'),
+                name: 'font-family',
+                type:'select',
+                options:['arial','cairo','cursive','monospace']
+            },
+            {
                 label: t('services.style.margin'),
                 name: 'margin',
                 type:'select',

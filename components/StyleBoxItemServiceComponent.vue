@@ -17,7 +17,6 @@
             size="sm"
             v-model="style_elements[slot_name(sec)][i?.name]"
             :icon="'i-heroicons-'+i?.icon"
-            required
         ></UInput>
         <USelectMenu
             v-else
@@ -29,7 +28,6 @@
             :searchable-placeholder="$t('search.by') + i?.name"
             class="w-full block"
             placeholder="Select a section"
-            required
             :options="i?.options"
         ></USelectMenu>
       </div>

@@ -73,7 +73,7 @@ export default defineI18nConfig(() => ({
                 submit:'حقل ارسال البيانات',
                 color:'لون الخط',
                 margin:'المسافات',
-                font_size:'حجم خط حقول الادخال',
+                font_size:'حجم الخط',
                 font_family:'نوع الخط',
                 width:'المساحة',
                 background_color:'لون الخلفية'
@@ -176,7 +176,7 @@ export default defineI18nConfig(() => ({
                     submit:'Submit Form input',
                     color:'Font color',
                     margin:'Margin',
-                    font_size:'Font size For inputs',
+                    font_size:'Font size',
                     font_family:'Font family',
                     width:'Width',
                     background_color:'Background Color'

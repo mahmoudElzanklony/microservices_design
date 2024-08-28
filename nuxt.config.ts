@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       axiosBaseUrl: process.env.API_BASE_URL,
+      clientUrl:process.env.CLIENT_URL
     }
   },
   modules: [

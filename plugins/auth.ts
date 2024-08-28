@@ -1,21 +1,35 @@
 import cookie from 'cookie';
 
 export default defineNuxtPlugin((nuxtApp) => {
-    // Function to get user data from cookies
-    const req = useRequestHeaders();
     let user = null;
-    try{
-        user = req.cookie;
-        if(user) {
-            user = req.cookie.split('; user=');
-            if (user[1]) {
-                user = JSON.parse(user[1].split(';')[0]);
+
+    // For Server-side
+    if (process.server) {
+        const req = useRequestHeaders(['cookie']);
+        if (req.cookie) {
+            try {
+                const parsedCookies = cookie.parse(req.cookie);
+                if (parsedCookies.user) {
+                    user = JSON.parse(parsedCookies.user);
+                }
+            } catch (e) {
+                user = null;
             }
         }
-    }catch (e){
-        user = null;
     }
 
+    // For Client-side
+    if (process.client) {
+        try {
+            const parsedCookies = cookie.parse(document.cookie);
+            if (parsedCookies.user) {
+                user = JSON.parse(parsedCookies.user);
+            }
+        } catch (e) {
+            user = null;
+        }
+    }
 
-     nuxtApp.provide('auth', user);
-})
+    // Provide the user globally
+    nuxtApp.provide('auth', user);
+});
