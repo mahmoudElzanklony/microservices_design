@@ -5,9 +5,9 @@
     <ul class="w-full">
       <li v-for="(i,index) in links"
           class="p-2.5 hover:bg-green-600 hover:text-white hover:rounded hover:transition-all">
-        <nuxt-link :to="i?.to" class="flex items-center space-x-4 w-full">
+        <nuxt-link :to="localeRoute({ path: i?.to})?.fullPath" class="flex items-center w-full">
           <UIcon :name="i?.icon"></UIcon>
-          <span>{{ i?.label }}</span>
+          <span class="mx-1.5">{{ i?.label }}</span>
         </nuxt-link>
       </li>
     </ul>
@@ -36,6 +36,7 @@
 import {LoginStore} from "../store/auth/login";
 let store = LoginStore()
 import ImageServerComponent from "./ImageServerComponent.vue";
+const localeRoute = useLocaleRoute()
 
 const { $auth } = useNuxtApp()
 const { t } = useI18n();
@@ -66,6 +67,7 @@ const links = [
     to: '/clients'
   }
 ]
+
 
 </script>
 

@@ -50,19 +50,25 @@
         <UBadge  color="black" v-if="row[i[0]].length == 0">{{ $t('general.no_data') }}</UBadge>
         <UBadge size="sm" :class="key > 0 ? 'mx-1':'' " :key="key" v-for="(item,key) in row[i[0]]" :label="item[i[1]]" variant="subtle"></UBadge>
       </template>
+      <!-- start of attributes  -->
       <template #icon-data="{ row }">
         <div class="flex space-x-2 items-center">
           <UBadge size="sm" class="text-xs p-1">{{ row?.icon }}</UBadge>
           <Icon class="w-8 h-8" :name="'heroicons:'+row?.icon"></Icon>
         </div>
       </template>
+      <!-- end of attributes  -->
 
+      <!-- start of client reply reactions -->
       <template v-if="store.data?.data.length > 0 && store.data?.data[0].latitude" #expand="{ row }">
         <handle-table-client-answer :row="row"></handle-table-client-answer>
       </template>
+      <!-- end of client reply reactions -->
+
       <template #actions-data="{ row }">
         <UDropdown :items="row_actions(row,handleDelete)">
-          <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+          <UButton color="gray" variant="ghost"
+                   icon="i-heroicons-ellipsis-horizontal-20-solid" />
         </UDropdown>
       </template>
     </UTable>

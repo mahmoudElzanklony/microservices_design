@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <h2>aaaaaaaaaa</h2>
+    <button @click="setLocale('ar')">change lang</button>
   </div>
 </template>
 

@@ -8,9 +8,25 @@
 </template>
 
 <script setup lang="ts">
-  import {onMounted} from "vue";
+  import { onMounted, watch } from 'vue'
+  import { useI18n } from 'vue-i18n'
+
+  const { locale } = useI18n()
+
+  // Function to update the HTML 'dir' attribute based on the current locale
+  const setHtmlDirection = (currentLocale) => {
+    const isRtl = ['ar', 'he', 'fa'].includes(currentLocale)  // Adjust based on your RTL languages
+    document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr')
+  }
+
+  // Watch for changes in the locale and set the direction accordingly
+  watch(locale, (newLocale) => {
+    setHtmlDirection(newLocale)
+  })
+
 
   onMounted(() => {
+    setHtmlDirection(locale.value)
     const { $pusher, $Toast , $auth } = useNuxtApp();
 
 

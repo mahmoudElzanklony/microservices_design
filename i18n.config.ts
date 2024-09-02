@@ -73,7 +73,12 @@ export default defineI18nConfig(() => ({
               ar_sub_title:'العنوان الفرعي بالعربي' ,
               en_sub_title:'العنوان الفرعي بالانجليزي' ,
               attributes_data:'حقول ادخال الخدمه',
-              style:{
+              style_service:'تصميم الخدمة',
+              insert_iframe:'ضع هذا الكود الخاص بهذه الخدمة في اي موقع خاص بك',
+              arabic_service:'الكود الخاص بالخدمة باللغة العربيه',
+              english_service:'الكود الخاص بالخدمة باللغة الانجليزي',
+
+                style:{
                 main_section:'نموذج ملئ البيانات',
                 main_titles:'العنواين الاساسية',
                 main_inputs:'حقول الادخال',
@@ -196,6 +201,10 @@ export default defineI18nConfig(() => ({
                 ar_sub_title:'Sub title in arabic' ,
                 en_sub_title:'Sub title in english' ,
                 attributes_data:'Service Attributes Data',
+                style_service:'Service style',
+                insert_iframe:'put this code at your own website to enable this service',
+                arabic_service:'Code for arabic iframe',
+                english_service:'Code for english iframe',
                 style:{
                     main_section:'Main form',
                     main_titles:'Main titles',

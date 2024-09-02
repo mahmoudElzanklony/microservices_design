@@ -1,4 +1,30 @@
 <template>
+  <div class="p-6 overflow-hidden">
+    <UCard class="overflow-hidden" :ui="{header:'p-0',}">
+      <template #header>
+        <p class="bg-primary p-2">
+          <span class="text-white text-2xl">{{ $t('services.insert_iframe') }}</span>
+        </p>
+      </template>
+      <div>
+        <div class="mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <p class="text-1xl text-gray-700">{{ $t('services.arabic_service') }}</p>
+            <UIcon @click="copyToClipboard" class="text-primary w-6 h-6 cursor-pointer" name="heroicons:clipboard-document-check-solid"></UIcon>
+          </div>
+          <pre class="arabic text-red-800 font-bold"> </pre>
+        </div>
+        <div class="mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <p class="text-1xl text-gray-700">{{ $t('services.english_service') }}</p>
+            <UIcon @click="copyToClipboard" class="text-primary w-6 h-6 cursor-pointer" name="heroicons:clipboard-document-check-solid"></UIcon>
+          </div>
+          <pre class="english text-red-800 font-bold"></pre>
+        </div>
+
+      </div>
+    </UCard>
+  </div>
   <ClientOnly>
     <form class="p-6" method="post"
           @submit.prevent="save_data_service_style_fn">
@@ -105,10 +131,11 @@
 <script setup lang="ts">
   // -----------start  of import---------------------
   import { useRoute } from 'vue-router';
-  import {navigateTo,} from "nuxt/app";
+  import {navigateTo} from "nuxt/app";
+
   import {ServicesStore} from "../../../store/services";
   import {SectionsStore} from "../../../store/sections";
-  import {reactive, watch} from "vue";
+  import {onMounted, reactive, watch} from "vue";
   import StyleBoxItemServiceComponent from "../../../components/StyleBoxItemServiceComponent.vue";
   import { useFormManagement} from "../../../composables/services_style/useFormManagement";
   import {useStyleManagement} from "../../../composables/services_style/useStyleManagement";
@@ -143,7 +170,7 @@
   let router = useRoute();
   let serviceStore = ServicesStore()
   let SectionStore = SectionsStore()
-
+  let config = useRuntimeConfig()
 
 
 
@@ -202,7 +229,23 @@
     }
 
   // --------------------end of style----------------------------
+  onMounted(()=>{
+     document.querySelector('pre.arabic').textContent =
+         '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/ar/services/embedded?id='+router?.params?.id+'" width="100%" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+    document.querySelector('pre.english').textContent =
+        '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/en/services/embedded?id='+router?.params?.id+'" width="100%" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+  })
+  const {  $Toast } = useNuxtApp();
 
+  function copyToClipboard() {
+    let el = event.target.parentElement.nextElementSibling;
+
+    navigator.clipboard.writeText(el.textContent).then(() => {
+      $Toast.success('copied successfully');
+    }).catch(err => {
+      $Toast.error('Failed to copy text: ', err);
+    });
+  }
 
 
 </script>
@@ -229,5 +272,8 @@
   padding: 7px 25px;
   border-radius: 8px;
   margin: auto;
+}
+pre{
+  white-space: break-spaces;
 }
 </style>
