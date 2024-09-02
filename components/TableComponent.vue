@@ -3,10 +3,15 @@
       <ModalBox :is-open="isOpen"></ModalBox>
     </teleport>
     <div class="flex items-center justify-between my-2.5">
-      <h2 class="text-3xl mb-0">{{ title }}</h2>
+      <h2 class="text-3xl mb-0">
+        <span>{{ title }}</span>
+        <span  class="text-xl mx-2">({{ $t('general.total') }}:</span>
+        <strong class="text-xl text-primary">{{ store.data?.meta?.total }}</strong>
+        <span class="text-xl">)</span>
+      </h2>
       <ul class="flex items-center">
         <li>
-          <UButton
+          <UButton v-if="modal_inputs.length > 0"
               class="mx-3"
               icon="i-heroicons-plus"
               size="lg"
@@ -51,6 +56,10 @@
           <Icon class="w-8 h-8" :name="'heroicons:'+row?.icon"></Icon>
         </div>
       </template>
+
+      <template v-if="store.data?.data.length > 0 && store.data?.data[0].latitude" #expand="{ row }">
+        <handle-table-client-answer :row="row"></handle-table-client-answer>
+      </template>
       <template #actions-data="{ row }">
         <UDropdown :items="row_actions(row,handleDelete)">
           <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
@@ -68,7 +77,7 @@
                       :id="deleted_ids"
                       :is-open="isOpen"></DeleteBoxComponent>
 
-  <ModalBoxComponent @update:isOpen="closeModal"
+  <ModalBoxComponent v-if="modal_inputs.length > 0" @update:isOpen="closeModal"
                      :edited_row="edited_row"
                      :is-open="isOpenForModal"
                      :store="store"
@@ -79,11 +88,14 @@
 import {onMounted, reactive, ref, watch} from "vue";
 import ModalBox from "./ModalBoxComponent.vue";
 import FilterTable from "../dom/FilterTable";
+import process from "node:process";
+import HandleTableClientAnswer from "./HandleTableClientAnswer.vue";
 // define variables
 let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','store_name','row_actions'])
 //---------------- start of store------------
 let store = props.store_name()
 await store.get_data_action();
+
 
 //---------------- end of store------------
 const filterString = ref(''); // for filter inputs

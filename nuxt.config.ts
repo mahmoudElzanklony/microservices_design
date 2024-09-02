@@ -7,7 +7,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       axiosBaseUrl: process.env.API_BASE_URL,
-      clientUrl:process.env.CLIENT_URL
+      hostUrl: process.env.HOST_URL,
+      clientUrl:process.env.CLIENT_URL,
+      PUSHER_APP_KEY: process.env.PUSHER_APP_KEY,
+      PUSHER_APP_CLUSTER: process.env.PUSHER_APP_CLUSTER,
     }
   },
   modules: [
@@ -18,7 +21,8 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/axios',
     '~/plugins/toast',
-    '~/plugins/auth'
+    '~/plugins/auth',
+    '~/plugins/pusher'
   ],
   i18n: {
     vueI18n: './i18n.config.ts',

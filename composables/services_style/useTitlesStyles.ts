@@ -9,9 +9,14 @@ export  function useTitlesStyles() {
     let SectionStore = SectionsStore()
 
     const titles = [{
-        label: t('services.style.main_titles'),
+        label: t('services.style.main_section'),
         icon: 'i-heroicons-information-circle',
         defaultOpen: true,
+        slot: 'main_section'
+    },{
+        label: t('services.style.main_titles'),
+        icon: 'i-heroicons-information-circle',
+        defaultOpen: false,
         slot: 'main_titles'
     },{
         label: t('services.style.main_inputs'),

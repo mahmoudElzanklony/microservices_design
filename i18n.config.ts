@@ -18,7 +18,9 @@ export default defineI18nConfig(() => ({
               start_date:'بدايه الفتره الزمنية',
               end_date:'نهاية الفتره الزمنية',
               no_data:'لا يوجد بيانات',
-              main_info:'المعلومات الاساسية'
+              main_info:'المعلومات الاساسية',
+              total:'الأجمالي',
+              press_here:'اضغط هنا'
             },
             search:{
               name:'ابحث بالاسم',
@@ -26,7 +28,10 @@ export default defineI18nConfig(() => ({
             },
             general_inputs:{
                 name:'الاسم',
+                question:'السؤال',
+                answer:'الاجابة',
                 created_at:'التاريخ',
+                published_at:'تم النشر منذ',
                 email:'البريد الالكتروني',
                 password:'كلمة المرور',
                 username:'اسم المستخدم',
@@ -59,6 +64,7 @@ export default defineI18nConfig(() => ({
                 login_here:'تسجيل الدخول من هنا',
             },
             services:{
+              service:'الخدمة',
               name:'الاسم',
               main_title:'العنوان الرئيسي' ,
               sub_title:'العنوان الفرعي' ,
@@ -68,6 +74,7 @@ export default defineI18nConfig(() => ({
               en_sub_title:'العنوان الفرعي بالانجليزي' ,
               attributes_data:'حقول ادخال الخدمه',
               style:{
+                main_section:'نموذج ملئ البيانات',
                 main_titles:'العنواين الاساسية',
                 main_inputs:'حقول الادخال',
                 submit:'حقل ارسال البيانات',
@@ -76,6 +83,10 @@ export default defineI18nConfig(() => ({
                 font_size:'حجم الخط',
                 font_family:'نوع الخط',
                 width:'المساحة',
+                border_width:'حجم الحدود',
+                border_style:'نوع الحدود',
+                border_color:'لون الحدود',
+                border_radius:'انحناء الحدود',
                 background_color:'لون الخلفية'
               }
             },
@@ -88,6 +99,8 @@ export default defineI18nConfig(() => ({
                 attribute:'حقل ادخال',
                 label:'الوسم',
                 placeholder:'التوضيح الذي يكتب في حقل الادخال',
+                ar_option:'الاختيار بالعربي',
+                en_option:'الاختيار بالانجليزي',
                 ar_label:'اسم الوسم بالعربي',
                 en_label:'اسم الوسم بالانجليزي',
                 ar_placeholder:'التوضيح الذي يكتب في حقل الادخال بخط رمادي بالعربي',
@@ -102,6 +115,13 @@ export default defineI18nConfig(() => ({
                 select:'اختر من متعدد',
                 options:'الاختيارات',
                 file:'ملف',
+            },
+            clients:{
+              answers_count:'عدد الاجابات',
+              location:'الموقع',
+              longitude:'خطوط الطول',
+              latitude:'خطوط العرض',
+              url:'الرابط',
             },
             welcome:'مرحبا',
         },
@@ -121,11 +141,16 @@ export default defineI18nConfig(() => ({
                 start_date:'Start date',
                 end_date:'End date',
                 no_data:'No data',
-                main_info:'General info'
+                main_info:'General info',
+                total:'Total',
+                press_here:'Press here',
             },
             general_inputs:{
+                question:'Question',
+                answer:'Answer',
                 name:'Name',
                 created_at:'Date',
+                published_at:'Published at',
                 email:'Email',
                 password:'Password',
                 username:'Username',
@@ -162,6 +187,7 @@ export default defineI18nConfig(() => ({
                 login_here:'login from here',
             },
             services:{
+                service:'Service',
                 name:'Name',
                 main_title:'Main title' ,
                 sub_title:'Sub title' ,
@@ -171,6 +197,7 @@ export default defineI18nConfig(() => ({
                 en_sub_title:'Sub title in english' ,
                 attributes_data:'Service Attributes Data',
                 style:{
+                    main_section:'Main form',
                     main_titles:'Main titles',
                     main_inputs:'Main inputs',
                     submit:'Submit Form input',
@@ -179,6 +206,10 @@ export default defineI18nConfig(() => ({
                     font_size:'Font size',
                     font_family:'Font family',
                     width:'Width',
+                    border_width:'Border width',
+                    border_style:'Border style',
+                    border_color:'Border color',
+                    border_radius:'Border curve',
                     background_color:'Background Color'
                 }
             },
@@ -191,6 +222,8 @@ export default defineI18nConfig(() => ({
                 attribute:'Attribute',
                 label:'Label',
                 placeholder:'Placeholder',
+                ar_option:'Option in arabic',
+                en_option:'Option in english',
                 ar_label:'Label in arabic',
                 en_label:'Label in english',
                 ar_placeholder:'text that put at input to explain input in arabic',
@@ -205,6 +238,13 @@ export default defineI18nConfig(() => ({
                 options:'Options',
                 file:'File',
                 icon_txt:'put icon for input field you can use this link to put code icon https://icones.js.org/collection/heroicons example for icon code (academic-cap)',
+            },
+            clients:{
+                answers_count:'Answers count',
+                longitude:'Longitude',
+                location:'Location',
+                latitude:'Latitude',
+                url:'Url',
             },
             welcome: 'Welcome'
         },

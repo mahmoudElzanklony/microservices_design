@@ -82,27 +82,11 @@
            </UButton>
          </div>
        </div>
-       <div class="simulation" v-if="general_info">
-          <div class="form flex flex-wrap">
-             <h2 class="text-center text-3xl w-full"
-                 >{{ general_info[locale + '_main_title'] }}</h2>
-             <h2 class="text-center text-xl w-full">{{ general_info[locale + '_sub_title'] }}</h2>
-             <div class="input-data"  v-for="(i,index) in sections_attr_ids" :key="index">
-               <label v-if="i?.section_id != null">{{ SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.label }}</label>
-               <UInput v-if="i?.section_id != null"
-                   :type="SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.type"
-                   :name="SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.name"
-                   :icon="'i-heroicons-'+(SectionStore.data?.data.find((e) => e.id === i['section_id'])?.attributes?.find((e) => e?.id == i['attribute_id'])?.icon)"
-                   size="sm"
-                   ></UInput>
-             </div>
-             <div class="input-submit">
-               <button   type="button" >
-                 {{ $t('general.save') }}
-               </button>
-             </div>
-          </div>
-       </div>
+       <FinalServiceComponent v-if="SectionStore.data?.data" :general_info="general_info"
+                              :sections_attr_ids="sections_attr_ids"
+                              :sectionData="SectionStore.data?.data"></FinalServiceComponent>
+
+
        <div class="style">
          <div >
            <StyleBoxItemServiceComponent
@@ -130,6 +114,7 @@
   import {useStyleManagement} from "../../../composables/services_style/useStyleManagement";
   import {useTitlesStyles} from "../../../composables/services_style/useTitlesStyles";
   import {useCheckServiceBelongToOwner} from "../../../composables/services_style/useCheckServiceBelongToOwner";
+  import FinalServiceComponent from "../../../components/FinalServiceComponent.vue";
 
   let { inputs, styles, main_inputs_up_down,sections_attr_ids, section_attributes_up_down,
     fetchSections } = useFormManagement();
@@ -206,7 +191,6 @@
 
     // save style data
     function save_data_service_style_fn() {
-      console.log('test--------------')
       let data = new FormData(event.target);
       console.log(data)
       for (let i of sections_attr_ids) {

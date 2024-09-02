@@ -28,7 +28,7 @@ export default defineNuxtPlugin((nuxtApp) => {
                     config.headers.lang = lang;
                 }
             }catch (e){
-                console.log(e)
+                //console.log(e)
             }
 
 
@@ -61,15 +61,15 @@ export default defineNuxtPlugin((nuxtApp) => {
     }, (error) => {
         const Toast = nuxtApp.$Toast;
         const router = useRouter();
-        if(error?.response?.data && error?.response?.data.hasOwnProperty('message') &&  error?.response?.data.message.indexOf('Unauthenticated') >= 0){
 
+        if(error?.response?.data && error?.response?.data.hasOwnProperty('message') &&  error?.response?.data.message.indexOf('Unauthenticated') >= 0){
             router.push('/auth/login');
         }
         if(typeof error?.response?.data?.errors == 'string'){
             Toast.error(error?.response?.data?.errors)
         }else{
             if(error?.response?.data?.errors) {
-                console.log(error?.response?.data?.errors)
+                //console.log(error?.response?.data?.errors)
                 if(typeof error?.response?.data?.errors === 'object' && error?.response?.data?.errors !== null){
                     for(let err of Object.values(error?.response?.data?.errors)){
                         Toast.error(err[0])
