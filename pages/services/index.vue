@@ -13,6 +13,7 @@
       >
         <template #filters>
           <form class="flex space-x-2">
+            <FilterByUserNameComponent></FilterByUserNameComponent>
             <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
               <label class="block w-100">{{ $t('services.name') }}</label>
               <UInput name="name"  :placeholder="$t('search.by')+$t('services.name')" />
@@ -45,8 +46,10 @@ import createTableColumns from "./table_columns";
 import createModalBoxColumns from "./modal_box_columns";
 import {ServicesStore } from "../../store/services";
 import ActionsTable from "./ActionsTable";
+import FilterByUserNameComponent from "../../components/FilterByUserNameComponent.vue";
 
 const { t } = useI18n();
+
 
 
 const columns = createTableColumns(t)

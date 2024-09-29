@@ -47,20 +47,21 @@ const links = [
     to: '/'
   },
   {
-    label: t('navbar.attributes'),
-    icon: 'i-heroicons-chart-bar',
-    to: '/attributes'
-  },
-  {
-    label: t('navbar.sections'),
-    icon: 'i-heroicons-command-line',
-    to: '/sections'
-  },
-  {
     label: t('navbar.services'),
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/services'
   },
+  {
+    label: t('navbar.attributes'),
+    icon: 'i-heroicons-chart-bar',
+    to: '/attributes'
+  },
+  /*{
+    label: t('navbar.sections'),
+    icon: 'i-heroicons-command-line',
+    to: '/sections'
+  },*/
+
   {
     label: t('navbar.client_reactions'),
     icon: 'i-heroicons-users',

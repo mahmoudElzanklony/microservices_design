@@ -28,6 +28,7 @@
               variant="solid"
               :label="$t('general.delete')"
               :trailing="false"
+              @click="deleteItems"
           />
         </li>
       </ul>
@@ -45,22 +46,31 @@
         v-model="selected"
         sort-mode="manual"
     >
-
+      <!-- start of sections  -->
       <template v-for="i in data_row_relations"  v-slot:[`${i[0]}-data`] = {row} >
         <UBadge  color="black" v-if="row[i[0]].length == 0">{{ $t('general.no_data') }}</UBadge>
         <UBadge size="sm" :class="key > 0 ? 'mx-1':'' " :key="key" v-for="(item,key) in row[i[0]]" :label="item[i[1]]" variant="subtle"></UBadge>
       </template>
+      <!-- start of sections  -->
+
       <!-- start of attributes  -->
       <template #icon-data="{ row }">
         <div class="flex space-x-2 items-center">
-          <UBadge size="sm" class="text-xs p-1">{{ row?.icon }}</UBadge>
           <Icon class="w-8 h-8" :name="'heroicons:'+row?.icon"></Icon>
         </div>
       </template>
       <!-- end of attributes  -->
 
+      <!-- start of services  -->
+      <template #type-data="{ row }">
+        <div class="flex space-x-2 items-center">
+          <span>{{ row?.type.replace('_',' ') }}</span>
+        </div>
+      </template>
+      <!-- end of services  -->
+
       <!-- start of client reply reactions -->
-      <template v-if="store.data?.data.length > 0 && store.data?.data[0].latitude" #expand="{ row }">
+      <template v-if="store.data?.data?.length > 0 && store.data?.data[0].latitude" #expand="{ row }">
         <handle-table-client-answer :row="row"></handle-table-client-answer>
       </template>
       <!-- end of client reply reactions -->
@@ -95,11 +105,13 @@ import {onMounted, reactive, ref, watch} from "vue";
 import ModalBox from "./ModalBoxComponent.vue";
 import FilterTable from "../dom/FilterTable";
 import process from "node:process";
+import {DeleteStore} from "../store/DeleteItems";
 import HandleTableClientAnswer from "./HandleTableClientAnswer.vue";
 // define variables
-let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','store_name','row_actions'])
+let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','db_table','store_name','row_actions'])
 //---------------- start of store------------
 let store = props.store_name()
+let delete_store = DeleteStore()
 await store.get_data_action();
 
 
@@ -157,7 +169,15 @@ const closeModal = () => {
 // Actions function with emit
 
 
+async function deleteItems(){
 
+  delete_store.data = {table:(props.db_table != null ? props.db_table:props.table),id:selected.value.map((e)=> e?.id)}
+
+  await delete_store.delete_action(props.table)
+  await store.get_data_action(filterString.value.length < 3 ? '?page='+page.value:filterString.value+'&page='+page.value);
+
+
+}
 
 
 

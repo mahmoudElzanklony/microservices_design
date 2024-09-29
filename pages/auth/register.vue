@@ -54,7 +54,7 @@ import {RegisterStore} from "../../store/auth/register";
 
 const store = RegisterStore()
 definePageMeta({
-  layout: false,
+  layout: 'main',
   head: {
     title: 'Register | تسجيل مستخدم جديد'
   }

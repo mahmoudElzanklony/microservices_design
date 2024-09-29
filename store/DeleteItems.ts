@@ -26,7 +26,14 @@ export const DeleteStore = defineStore('delete', {
             try {
                 let formData = new FormData();
                 formData.append('table',this.data?.table)
-                formData.append('id[]',this.data?.id)
+                if(this.data?.id.length > 1){
+                    for(let i of this.data.id){
+                        formData.append('id[]',i)
+                    }
+                }else{
+                    formData.append('id[]',this.data?.id)
+                }
+
                 const store = await dynamic_import(table)
 
                 const response = await $axios.post('/deleteitem',formData);

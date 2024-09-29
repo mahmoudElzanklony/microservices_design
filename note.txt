@@ -1,0 +1,8 @@
+show icon only at attributes
+
+make url of icons clickable and change text to be more simple
+click on icones service and copy the icon name into the field
+
+remove sections from microservices
+Services to ==> Forms
+Attributes ==> Fields

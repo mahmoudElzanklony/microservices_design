@@ -2,7 +2,7 @@
 
   <div class="p-4">
     <TableComponent
-        :title="$t('navbar.sections')"
+        :title="$t('navbar.attributes')"
         :columns="columns"
         :data_row_relations="[]"
         :modal_inputs="box_inputs"
@@ -14,6 +14,7 @@
 
       <template #filters>
         <form class="flex space-x-2">
+          <FilterByUserNameComponent></FilterByUserNameComponent>
           <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
             <label class="block w-100">{{ $t('general_inputs.name') }}</label>
             <UInput name="name"  :placeholder="$t('search.by')+$t('general_inputs.name')" />

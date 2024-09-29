@@ -9,9 +9,9 @@
               enctype="multipart/form-data"
               @submit.prevent="save_data"
               v-if="submit">
-          <HandleFinalServiceInputs :section-data="sectionData" :sections_attr_ids="sections_attr_ids" :submit="submit"></HandleFinalServiceInputs>
+          <HandleFinalServiceInputs :attributes_data="attributesData" :sections_attr_ids="sections_attr_ids" :submit="submit"></HandleFinalServiceInputs>
         </form>
-        <HandleFinalServiceInputs v-else :section-data="sectionData" :sections_attr_ids="sections_attr_ids" :submit="submit"></HandleFinalServiceInputs>
+        <HandleFinalServiceInputs v-else :attributes_data="attributesData" :sections_attr_ids="sections_attr_ids" :submit="submit"></HandleFinalServiceInputs>
 
       </div>
     </client-only>
@@ -26,7 +26,7 @@ import {embdedMicrroService} from "../store/embdedMicroService";
 import {useRouter} from "nuxt/app";
 import {useRoute} from "vue-router";
 
-defineProps(['general_info','sectionData','sections_attr_ids','submit'])
+defineProps(['general_info','attributesData','sections_attr_ids','submit'])
   const { locale, setLocale  } = useI18n()
 
 let store = embdedMicrroService()
@@ -39,10 +39,15 @@ function save_data(){
     navigator.geolocation.getCurrentPosition(
         position => {
           const { latitude, longitude } = position.coords;
+          console.log(latitude)
+          console.log(longitude)
           data.append('latitude',latitude)
           data.append('longitude',longitude)
           data.append('service_id',router.query?.id)
-          data.append('url',window.location.origin)
+          var url = (window.location != window.parent.location)
+              ? document.referrer
+              : document.location.href;
+          data.append('url',url)
           store.save_action(data);
         },
         error => {

@@ -1,6 +1,15 @@
 // Define a function that accepts `t` as an argument
 export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
-    return [
+    let {$auth} = useNuxtApp();
+    let arr = [];
+    if($auth && $auth?.role == 'admin'){
+        arr.push({
+            label: t('general_inputs.username'),
+            key: 'user.username',
+            sortable: true
+        });
+    }
+    arr.push(
         {
             label: t('general_inputs.name'),
             key: 'name',
@@ -17,6 +26,11 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
             sortable: true
         },
         {
+            label: t('attributes.type'),
+            key: 'type',
+            sortable: true
+        },
+        {
             label: t('general_inputs.created_at'),
             key: 'created_at',
             sortable: true
@@ -24,5 +38,7 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
         {
             key: 'actions'
         }
-    ];
+    );
+
+    return arr;
 }

@@ -6,7 +6,8 @@
         :columns="columns"
         :data_row_relations="[]"
         :modal_inputs="[]"
-        table="sections"
+        table="clients"
+        db_table="clients_services_sections_private_data"
         :row_actions="ActionsTable"
         :store_name="ClientsStore"
 

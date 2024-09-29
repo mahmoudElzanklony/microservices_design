@@ -6,8 +6,21 @@ export default defineNuxtConfig({
   pages: true,
   app: {
     head: {
+      meta: [
+        {
+          "name": "viewport",
+          "content": "width=device-width, initial-scale=1"
+        },
+        {
+          "charset": "utf-8"
+        }
+      ],
       htmlAttrs: { dir: 'ltr', lang: 'en' },
+      script: [
+        { src: 'https://www.google.com/recaptcha/api.js' }
+      ],
     },
+    pageTransition: { name: 'fade', mode: 'out-in' }
   },
   runtimeConfig: {
     public: {
@@ -18,6 +31,9 @@ export default defineNuxtConfig({
       PUSHER_APP_CLUSTER: process.env.PUSHER_APP_CLUSTER,
     }
   },
+  css: [
+    '@/public/css/style.css' // Path to your CSS file in assets
+  ],
   modules: [
       "@nuxt/ui",
       "@nuxtjs/i18n",
@@ -34,5 +50,9 @@ export default defineNuxtConfig({
       locales: ['en', 'ar'],
       defaultLocale: 'en',
   },
+  extend (config, ctx) {
+    config.resolve.symlinks = false
+  },
+
 
 })

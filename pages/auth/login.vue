@@ -13,7 +13,10 @@
                   required></UInput>
         </div>
         <div class="mb-2.5">
-          <label>{{ $t('general_inputs.password') }}</label>
+          <div class="flex justify-between">
+            <label>{{ $t('general_inputs.password') }}</label>
+            <nuxt-link class="text-primary" to="/auth/forget-password">{{ $t('login.forget_password') }}</nuxt-link>
+          </div>
           <UInput name="password"
                   icon="i-heroicons-lock-closed"
                   size="sm"
@@ -21,6 +24,7 @@
                   required></UInput>
         </div>
         <div class="mb-2.5">
+          <RecaptchaComponent></RecaptchaComponent>
           <UButton :loading="LoginStoreData.loading" type="submit" block>
             {{ $t('login.submit') }}
           </UButton>
@@ -36,11 +40,12 @@
 
 <script setup lang="ts">
 import {LoginStore} from "../../store/auth/login";
+import RecaptchaComponent from "../../components/RecaptchaComponent.vue";
 
 const LoginStoreData = LoginStore()
 
 definePageMeta({
-  layout: false,
+  layout: 'main',
   head: {
     title: 'Login | تسجيل دخول'
   }

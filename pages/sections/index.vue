@@ -13,6 +13,7 @@
     >
       <template #filters>
         <form class="flex space-x-2">
+          <FilterByUserNameComponent></FilterByUserNameComponent>
           <div class="search-input px-3 py-3.5 border-b border-gray-200 ">
             <label class="block w-100">{{ $t('general_inputs.name') }}</label>
             <UInput name="name"  :placeholder="$t('search.by')+$t('general_inputs.name')" />
@@ -49,8 +50,12 @@ import createModalBoxColumns from "./modal_box_columns";
 import {SectionsStore} from "../../store/sections";
 import ActionsTable from "../../fixed_data/ActionsTable";
 import {ref} from "vue";
+import FilterByUserNameComponent from "../../components/FilterByUserNameComponent.vue";
 
 const { t } = useI18n();
+
+const {$auth} = useNuxtApp();
+
 
 const columns = createTableColumns(t)
 const box_inputs = createModalBoxColumns(t)

@@ -55,6 +55,7 @@ import {useNuxtApp} from "nuxt/app";
     }
   }
 
+emit('form_style_fn', style_elements);
 watch(() => style_elements, (newVal) => {
   emit('form_style_fn', newVal);
 },{

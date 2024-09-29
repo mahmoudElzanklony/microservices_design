@@ -8,6 +8,7 @@ export default defineI18nConfig(() => ({
             },
             general:{
               save:'حفظ',
+              send:'ارسال',
               save_txt:'حفظ البيانات',
               edit:'تعديل',
               add_item:'اضافة عنصر',
@@ -15,16 +16,94 @@ export default defineI18nConfig(() => ({
               accept:'موافق',
               cancel:'الغاء',
               add_sec:'اضافة قسم جديد',
+              add_attr:'اضافة حقل ادخال',
               start_date:'بدايه الفتره الزمنية',
               end_date:'نهاية الفتره الزمنية',
               no_data:'لا يوجد بيانات',
               main_info:'المعلومات الاساسية',
               total:'الأجمالي',
-              press_here:'اضغط هنا'
+              press_here:'اضغط هنا',
+              app_name:'MicroServices',
+              dashboard:'لوحه التحكم',
             },
             search:{
               name:'ابحث بالاسم',
               by:'أبحث عن طريق ',
+              get_started:'أبدا تجربتك الان',
+
+            },
+            home:{
+                build_your_form:'قم ببناء اي فورم تريدها',
+                using:'عن طريق',
+                get_started:'أبدا الان',
+                header:{
+                    title:'يمكنك الآن التفاعل مع عملائك بسهولة عن طريق إدخال منشئ النماذج الخاص بك',
+                    complete_title:' في مواقع الويب الخاصة بك واحصل على إجابات العملاء'
+                },
+                about_us:{
+                    title:'ماذا تعرف عنا',
+                    idea:'مايكرو سيرفس هي فكره لتوفير الوقت',
+                    info:'نحن نحاول بتوفير الوقت لدي عملائنا ببناء نماذج فورم لوضعها في مواقعهم الخاصه لسهوله تفاعل المستخدمين و ملئها بكل سرعه كما نتيح خاصيه معرفه رابط الموقع الذي تم من خلاله ارسال النموذج و موقع المستخدم علي الخريطه و مميزات اخري ',
+                },
+                features:[
+                    {
+                        icon:'i-heroicons-square-3-stack-3d',
+                        name:'بناء عدد لا نهائي من النماذج',
+                        content:'يمكنك إنشاء نماذج تحتوي على العديد من المدخلات باستخدام أي نوع من المدخلات تفضله',
+                    },
+                    {
+                        icon:'i-heroicons-clock',
+                        name:'الاشعارات تأتي في الوقت الحقيقي',
+                        content:'بمجرد حدوث أي إرسال جديد إلى النموذج الخاص بك، ستتلقى إشعارًا وستشاهد إجابات النموذج',
+                    },
+                    {
+                        icon:'i-heroicons-map-pin',
+                        name:'تتبع موقع المستخدم',
+                        content:'بمجرد حدوث أي إرسال جديد إلى النموذج الخاص بك، يمكنك معرفة موقع المستخدم على الخريطة الصغيرة',
+                    },
+                    {
+                        icon:'i-heroicons-share',
+                        name:'نموذج المشاركة المتعددة',
+                        content:'يمكنك مشاركة نموذج واحد مع العديد من المواقع ويمكنك تصفية عناوين الراوبط للمواقع من نظامنا',
+                    }
+                ],
+                need_help:'تحتاج الي مساعدة',
+                statistics:{
+                    title:'احصائيات سريعه',
+                    content:[
+                        {
+                            icon:'heroicons-users',
+                            name:'عملاء سعداء',
+                            number:'+9999',
+                        },
+                        {
+                            icon:'heroicons-rectangle-stack',
+                            name:'نماذج الخدمات',
+                            number:'+2000',
+                        },
+                        {
+                            icon:'heroicons-face-smile',
+                            name:'اجابات النماذج',
+                            number:'+9000',
+                        },
+                        {
+                            icon:'heroicons-phone',
+                            name:'دعم فني',
+                            number:'24/7',
+                        },
+
+                    ]
+                },
+                profit:{
+                    title:'ما الذي ستأخذه من استخدامك لمايكرو سيرفيس',
+                    data:[
+                        {content:'توفير الوقت عن طريق بناء نماذج في ثواني معدوده'},
+                        {content:'سهوله التفاعل مع عملائك'},
+                        {content:'صناعه التقارير بكل سهولة مع امكانية فلتره البيانات'},
+                        {content:'معرفة مكان عميلك علي الخريطة'},
+                    ]
+                }
+
             },
             general_inputs:{
                 name:'الاسم',
@@ -42,21 +121,29 @@ export default defineI18nConfig(() => ({
             },
             navbar:{
                 home:'الرئيسية',
-                services:'الخدمات',
+                services:'النماذج',
                 attributes:'الخصائص',
                 sections:'الاقسام',
-                client_reactions:'تفاعل العملاء',
+                client_reactions:'ردود العملاء',
+                statistics:'الأحصائيات',
+                notifications:'الاشعارات',
                 hi:'مرحبا'
             },
             delete:{
                 text:'هل أنت متأكد من عملية المسح',
                 note:'تذكر في حالة الموافقه علي المسح فلن تستطيع الرجوع في العملية'
             },
+            notifications:{
+                name:'الاشعارات',
+                service_client_submit:'ارسال بيانات نموذج الخدمة',
+            },
             login:{
               submit:'تسجيل دخول',
               logout:'تسجيل خروج',
               dont_have_acc:'لا تمتلك حساب',
               register_here:'تسجيل مستخدم جديد من هنا',
+              forget_password:'نسيت كلمة المرور',
+              confirmed_password:'تأكيد كلمة المرور'
             },
             register:{
                 submit:'تسجيل مستخدم جديد',
@@ -64,7 +151,7 @@ export default defineI18nConfig(() => ({
                 login_here:'تسجيل الدخول من هنا',
             },
             services:{
-              service:'الخدمة',
+              service:'النموذج',
               name:'الاسم',
               main_title:'العنوان الرئيسي' ,
               sub_title:'العنوان الفرعي' ,
@@ -77,7 +164,8 @@ export default defineI18nConfig(() => ({
               insert_iframe:'ضع هذا الكود الخاص بهذه الخدمة في اي موقع خاص بك',
               arabic_service:'الكود الخاص بالخدمة باللغة العربيه',
               english_service:'الكود الخاص بالخدمة باللغة الانجليزي',
-
+              contact:'تواصل',
+              in_mail:'ميل سيستم',
                 style:{
                 main_section:'نموذج ملئ البيانات',
                 main_titles:'العنواين الاساسية',
@@ -111,7 +199,7 @@ export default defineI18nConfig(() => ({
                 ar_placeholder:'التوضيح الذي يكتب في حقل الادخال بخط رمادي بالعربي',
                 en_placeholder:'التوضيح الذي يكتب في حقل الادخال بخط رمادي بالانجليزي',
                 icon:'الايقون',
-                icon_txt:'ضع ايقون مناسبة لحقل الادخال يمكنك اضافه كود الايقون من خلال هذا الرابط https://icones.js.org/collection/heroicons مثال علي الايقون (academic-cap)',
+                icon_txt:'اضغط علي رابط الخاص بالايقونات  https://icones.js.org/collection/heroicons وقم بنقل اسم الايقون بداخل حقل الادخال',
                 type:'النوع',
                 text:'نص',
                 textarea:'نص كبير',
@@ -128,6 +216,13 @@ export default defineI18nConfig(() => ({
               latitude:'خطوط العرض',
               url:'الرابط',
             },
+            footer:{
+                main_links:'الروابط المهمة',
+                policy:'ساسية الخصوصية',
+                privacy:'سياسة المستخدم',
+                contact:'التواصل',
+                terms:'شروط الاستخدام',
+            },
             welcome:'مرحبا',
         },
         en: {
@@ -136,9 +231,11 @@ export default defineI18nConfig(() => ({
             },
             general:{
                 save:'Save',
+                send:'Send',
                 save_txt:'Save data',
                 edit:'Edit',
                 add_sec:'Add new section',
+                add_attr:'Add new attribute',
                 add_item:'Add item',
                 delete:'Delete',
                 accept:'Accept',
@@ -149,6 +246,8 @@ export default defineI18nConfig(() => ({
                 main_info:'General info',
                 total:'Total',
                 press_here:'Press here',
+                app_name:'MicroServices',
+                dashboard:'Dashboard'
             },
             general_inputs:{
                 question:'Question',
@@ -174,17 +273,97 @@ export default defineI18nConfig(() => ({
             },
             navbar:{
                 home:'Home',
-                services:'Services',
+                services:'Forms',
                 attributes:'Attributes',
                 sections:'Sections',
-                client_reactions:'Client Reactions',
+                client_reactions:'Client Answers',
+                statistics:'Statistics',
+                notifications:'Notifications',
                 hi:'Hi'
+            },
+            home:{
+                build_your_form:'Build your personal form',
+                using:'using',
+                get_started:'Get started',
+                header:{
+                    title:'You can now interact with your clients easily by inserting your form builder',
+                    complete_title:' at your websites and get clients answers'
+                },
+                about_us:{
+                    title:'About us',
+                    idea:'Microservices is an idea to save time',
+                    info:'We try to save our clients time by building forms to place them on their own websites to facilitate user interaction and fill them out quickly. We also provide the feature of knowing the link to the website through which the form was sent and the user’s location on the map and other features.',
+                },
+                features:[
+                    {
+                        icon:'i-heroicons-square-3-stack-3d',
+                        name:'Build unlimited forms',
+                        content:'You can build forms with many inputs with any type of input you prefer',
+                    },
+                    {
+                        icon:'i-heroicons-clock',
+                        name:'Real time notifications',
+                        content:'Once any new submit to your form happen you will get notification and you see form answers',
+                    },
+                    {
+                        icon:'i-heroicons-map-pin',
+                        name:'Tracking user location',
+                        content:'Once any new submit to your form happen you can know location of user at small map',
+                    },
+                    {
+                        icon:'i-heroicons-share',
+                        name:'multi sharing form',
+                        content:'you can share one form with many websites and you can filter websites url from our system',
+                    }
+                ],
+                statistics:{
+                    title:'Quick statistics',
+                    content:[
+                        {
+                            icon:'heroicons-users',
+                            name:'Happy clients',
+                            number:'+9999',
+                        },
+                        {
+                            icon:'heroicons-rectangle-stack',
+                            name:'Services forms',
+                            number:'+2000',
+                        },
+                        {
+                            icon:'heroicons-face-smile',
+                            name:'Form answers',
+                            number:'+9000',
+                        },
+                        {
+                            icon:'heroicons-phone',
+                            name:'Support',
+                            number:'24/7',
+                        },
+
+                    ]
+                },
+                need_help:'Need help',
+                profit:{
+                    title:'What you will gain from microservices',
+                    data:[
+                        {content:'Save time to build dynamic forms'},
+                        {content:'Easy to interact with your clients'},
+                        {content:'make reports easily with ability to filter data'},
+                        {content:'know location of each your client'},
+                    ]
+                }
+            },
+            notifications:{
+                name:'Notifications',
+                service_client_submit:'Client form submit',
             },
             login:{
                 submit:'Login',
                 logout:'Logout',
                 dont_have_acc:'Don\'t have an account ?',
                 register_here:'register from here',
+                forget_password:'Forget password',
+                confirmed_password:'Password confirmation'
             },
             register:{
                 submit:'Register',
@@ -192,7 +371,7 @@ export default defineI18nConfig(() => ({
                 login_here:'login from here',
             },
             services:{
-                service:'Service',
+                service:'Forms',
                 name:'Name',
                 main_title:'Main title' ,
                 sub_title:'Sub title' ,
@@ -205,6 +384,8 @@ export default defineI18nConfig(() => ({
                 insert_iframe:'put this code at your own website to enable this service',
                 arabic_service:'Code for arabic iframe',
                 english_service:'Code for english iframe',
+                contact:'Contact',
+                in_mail:'In mail',
                 style:{
                     main_section:'Main form',
                     main_titles:'Main titles',
@@ -246,7 +427,7 @@ export default defineI18nConfig(() => ({
                 select:'Select',
                 options:'Options',
                 file:'File',
-                icon_txt:'put icon for input field you can use this link to put code icon https://icones.js.org/collection/heroicons example for icon code (academic-cap)',
+                icon_txt:'click on  https://icones.js.org/collection/heroicons service and copy the icon name into the field',
             },
             clients:{
                 answers_count:'Answers count',
@@ -254,6 +435,14 @@ export default defineI18nConfig(() => ({
                 location:'Location',
                 latitude:'Latitude',
                 url:'Url',
+            },
+            footer:{
+                main_links:'Main links',
+                policy:'Policy',
+                privacy:'User privacy',
+                contact:'Contact',
+                terms:'Terms',
+
             },
             welcome: 'Welcome'
         },

@@ -5,16 +5,19 @@ export function useStyleManagement() {
 
     const toStyleString = (obj) => {
         return Object.entries(obj)
-            .map(([key, value]) => `${key}:${value}${key === "width" ? "%" : ""}`)
+            .map(([key, value]) => `${key}:${value == "" ? "''":value}${key === "width" ? "%" : ""}`)
             .join(";");
     };
 
     const handleFormStyle = (data, time = 0) => {
+        console.log(data)
+        console.log(data.main_inputs)
         styleFormServiceData.value = data;
         const mainSectionStyle = toStyleString(data?.main_section || {});
         const mainTitlesStyle = toStyleString(data?.main_titles || {});
         const mainInputsStyle = toStyleString(data?.main_inputs || {});
         const submitStyle = toStyleString(data?.submit || {});
+
 
         if (time > 0) {
             setTimeout(() => {
@@ -26,7 +29,7 @@ export function useStyleManagement() {
     };
 
     const applyStyles = (mainSection,mainTitlesStyle, mainInputsStyle, submitStyle) => {
-        if(document) {
+        if(document && document.querySelector(".simulation > div")) {
             document.querySelector(".simulation > div").style.cssText = mainSection;
             document.querySelector(".simulation h2").style.cssText = mainTitlesStyle;
             document.querySelector(".simulation h2:last-of-type").style.cssText = mainTitlesStyle;

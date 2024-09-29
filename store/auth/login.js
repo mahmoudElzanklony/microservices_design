@@ -24,27 +24,13 @@ export const LoginStore = defineStore('login', {
                 // Store token in a cookie
                 document.cookie = `user=${JSON.stringify(this.userData)}; path=/; SameSite=Lax; Secure`;
                 document.cookie = `token=${this.userData.token}; path=/; SameSite=Lax; Secure`;
-                return navigateTo('/')
+                window.location = '/'
             } catch (error) {
                 this.error = error;
             } finally {
                 this.loading = false;
             }
         },
-        async logout() {
-            const { $axios } = useNuxtApp();
-            try {
-                await $axios.post('/auth/logout');
 
-                // Remove token cookie
-                document.cookie = 'user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-                document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-
-                this.userData = null;
-                navigateTo('/auth/login')
-            } catch (error) {
-                console.error('Logout failed:', error);
-            }
-        },
     }
 });

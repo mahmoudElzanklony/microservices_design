@@ -1,14 +1,13 @@
 <template>
   <div class="input-data"  v-for="(i,index) in sections_attr_ids" :key="index">
-    <label v-if="i?.section_id != null">{{ sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id']).label }}</label>
-    <input type="hidden" name="section_id[]" :value="sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.id">
-    <input type="hidden" name="attribute_id[]" :value="sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id'])?.id">
-    <UInput v-if="!(i?.section_id == null || sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id']).type == 'select')"
+    <label v-if="i?.attribute_id != null">{{ attributes_data.find((e) => e.id ==  i['attribute_id'])?.label }}</label>
+    <input type="hidden" name="attribute_id[]" :value="i?.attribute_id">
+    <UInput v-if="!(attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'select')"
             :style="{ outline: 'none' }"
-            :type="sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id']).type"
-            :name="sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id']).type != 'file' ?'answer[]':'files[]'"
+            :type="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type"
+            :name="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type != 'file' ?'answer['+index+']':'answer['+index+']'"
             v-model="selected[index]"
-            :icon="'i-heroicons-'+(sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id']).icon)"
+            :icon="'i-heroicons-'+(attributes_data.find((e) =>  e?.id == i['attribute_id'])?.icon)"
             size="sm"
     ></UInput>
     <USelectMenu v-else
@@ -16,12 +15,12 @@
                  size="sm"
                  value-attribute="name"
                  option-attribute="name"
-                 :name="'answer[]'"
+                 :name="'answer['+index+']'"
                  v-model="selected[index]"
-                 :searchable-placeholder="$t('search.by')+sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id'])?.name"
+                 :searchable-placeholder="$t('search.by')+attributes_data.find((e) =>  e?.id == i['attribute_id'])?.name"
                  class="w-full block"
                  placeholder="Select best option"
-                 :options="sectionData.find((e) => e.attributes.find((a) => a.id == i['attribute_id']))?.attributes?.find((e) => e?.id == i['attribute_id'])?.options"
+                 :options="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.options"
     ></USelectMenu>
   </div>
   <div class="input-submit">
@@ -34,7 +33,7 @@
 <script setup lang="ts">
   import {reactive} from "vue";
 
-  let props = defineProps(['sections_attr_ids','sectionData','submit'])
+  let props = defineProps(['sections_attr_ids','attributes_data','submit'])
   let selected = reactive([]);
   for(let i in props.sections_attr_ids){
     selected[i] = '';

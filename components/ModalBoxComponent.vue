@@ -22,7 +22,14 @@
           <input type="hidden" name="id" v-if="Object.keys(edited_row).length > 0"
                  :value="edited_row?.id">
           <div class="mb-5" v-for="(i,index) in inputs" :key="index">
-            <label class="mb-3 text-cool-500">{{ i?.label }}</label>
+            <label class="mb-3 text-cool-500" v-if="i?.label?.indexOf('http') >= 0">
+              {{ i?.label.substr(0,i?.label.indexOf('https://')) }}
+              <a class="text-blue-900"  :href="i?.label.substr(i?.label.indexOf('https://'), i?.label.indexOf(' ', i?.label.indexOf('https://')) - i?.label.indexOf('https://')) || i?.label.substr(str.indexOf('https://'))">
+                {{ i?.label.substr(i?.label.indexOf('https://'), i?.label.indexOf(' ', i?.label.indexOf('https://')) - i?.label.indexOf('https://')) || i?.label.substr(str.indexOf('https://')) }}
+              </a>
+              {{ i?.label.substr(i?.label.indexOf('https://') + (i?.label.substr(i?.label.indexOf('https://'), i?.label.indexOf(' ', i?.label.indexOf('https://')) - i?.label.indexOf('https://')) || i?.label.substr(str.indexOf('https://'))).length) }}
+            </label>
+            <label v-else>{{ i?.label }}</label>
 
             <UInput
                     v-if="i?.type == 'text' && i?.basedOnAttributeName == undefined"

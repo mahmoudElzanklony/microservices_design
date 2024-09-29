@@ -42,7 +42,7 @@ export const ServicesStore = defineStore('services', {
         async save_action(data:FormData) {
             this.loading = true;
             await new BaseStore<DataInterface>().save_action('/services',data)
-            this.data = await new BaseStore<DataInterface>().get_data_action('/services-sec-attrs','')
+            this.data = await new BaseStore<DataInterface>().get_data_action('/services','')
             this.loading = false;
         },
         async save_service_style_action(data:FormData) {

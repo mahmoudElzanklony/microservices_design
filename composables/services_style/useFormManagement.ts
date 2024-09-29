@@ -28,7 +28,7 @@ export function useFormManagement() {
         },
     ];
 
-    let sections_attr_ids = reactive([{ id: null, section_id: null, attribute_id: null }]);
+    let sections_attr_ids = reactive([{ id: null, attribute_id: null }]);
 
 
 

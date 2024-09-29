@@ -1,45 +1,29 @@
+// stores/user.ts
 import { defineStore } from 'pinia';
-import { AxiosError } from 'axios';
+import BaseStore from "./BaseStore";
 
-interface UserData {
+interface DataInterface {
     id: number;
-    name: string;
-    email: string;
+    username:string | null,
+    email:string | null,
+    phone:string | null,
+    created_at: string;
 }
 
-interface UserState {
-    userData: UserData | null;
-    loading: boolean;
-    error: AxiosError | null;
-}
 
-export const useUserStore = defineStore('user', {
-    state: (): UserState => ({
-        userData: null,
-        loading: false,
-        error: null,
+export const UserStore = defineStore('userStore', {
+    state: () => ({
+        ...new BaseStore<DataInterface>().state,
+        loading:false
     }),
+
     actions: {
-        async fetchUserData() {
-            const { $axios } = useNuxtApp();
+        async get_data_action(filters = '') {
             this.loading = true;
-            try {
-                const response = await $axios.get('/sections');
-                // Ensure data is plain and serializable
-                console.log('Server-side:', process.server);
-                console.log('Client-side:', process.client);
-                this.userData = response.data.data;
-                return this.userData;
-            } catch (error) {
-                if (error instanceof AxiosError) {
-                    this.error = error;
-                } else {
-                    console.error('Unexpected error:', error);
-                }
-                return null; // Ensure return type consistency
-            } finally {
-                this.loading = false;
-            }
+            this.data = await new BaseStore<DataInterface>().get_data_action('/dashboard/users',filters)
+            this.loading = false;
         },
+
+
     },
 });
