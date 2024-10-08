@@ -34,11 +34,7 @@ export default defineNuxtConfig({
   css: [
     '@/public/css/style.css' // Path to your CSS file in assets
   ],
-  modules: [
-      "@nuxt/ui",
-      "@nuxtjs/i18n",
-      "@pinia/nuxt",
-  ],
+  modules: ["@nuxt/ui", "@nuxtjs/i18n", "@pinia/nuxt", 'nuxt-time'],
   plugins: [
     '~/plugins/axios',
     '~/plugins/toast',

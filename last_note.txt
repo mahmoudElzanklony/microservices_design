@@ -1,0 +1,15 @@
+form style add value of type
+
+add captcha optional at form
+
+location is optional when submit data
+
+scan file uploaded from service
+
+tip at uploaded file max size for file is
+
+forms has button called answers and open it 
+make header of table as inputs of service with filters
+
+services has authorization when open it 
+list all actions with all members and you make on , off

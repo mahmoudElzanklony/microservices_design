@@ -25,12 +25,20 @@ export default defineI18nConfig(() => ({
               press_here:'اضغط هنا',
               app_name:'MicroServices',
               dashboard:'لوحه التحكم',
+              view:'عرض',
+              reply:'رد',
+              markAsEnd:'انهاء المحادثة'
             },
             search:{
               name:'ابحث بالاسم',
               by:'أبحث عن طريق ',
               get_started:'أبدا تجربتك الان',
 
+            },
+            controls:{
+                view:'رؤيه البيانات',
+                reply:'الرد علي العميل',
+                markAsEnd:'انهاء المحادثه'
             },
             home:{
                 build_your_form:'قم ببناء اي فورم تريدها',
@@ -72,7 +80,7 @@ export default defineI18nConfig(() => ({
                     title:'احصائيات سريعه',
                     content:[
                         {
-                            icon:'heroicons-users',
+                            icon:'heroicons-members',
                             name:'عملاء سعداء',
                             number:'+9999',
                         },
@@ -127,6 +135,7 @@ export default defineI18nConfig(() => ({
                 client_reactions:'ردود العملاء',
                 statistics:'الأحصائيات',
                 notifications:'الاشعارات',
+                members:'الأعضاء',
                 hi:'مرحبا'
             },
             delete:{
@@ -182,6 +191,10 @@ export default defineI18nConfig(() => ({
                 border_radius:'انحناء الحدود',
                 background_color:'لون الخلفية'
               }
+            },
+            members:{
+                privileges:'الصلاحيات',
+                leave_password:'أترك كلمة المرور فارغه في حالة عدم رغبتك في التعديل عليها',
             },
             sections:{
               visibility:'امكانية الظهور',
@@ -247,7 +260,10 @@ export default defineI18nConfig(() => ({
                 total:'Total',
                 press_here:'Press here',
                 app_name:'MicroServices',
-                dashboard:'Dashboard'
+                dashboard:'Dashboard',
+                view:'View',
+                reply:'Reply',
+                markAsEnd:'Mark as end'
             },
             general_inputs:{
                 question:'Question',
@@ -261,7 +277,11 @@ export default defineI18nConfig(() => ({
                 phone:'Phone',
                 ar_name:'Name in arabic',
                 en_name:'Name in english',
-
+            },
+            controls:{
+              view:'View',
+              reply:'Reply',
+              markAsEnd:'Mark As End'
             },
             search:{
                 name:'Search by name',
@@ -279,6 +299,7 @@ export default defineI18nConfig(() => ({
                 client_reactions:'Client Answers',
                 statistics:'Statistics',
                 notifications:'Notifications',
+                members:'Members',
                 hi:'Hi'
             },
             home:{
@@ -320,7 +341,7 @@ export default defineI18nConfig(() => ({
                     title:'Quick statistics',
                     content:[
                         {
-                            icon:'heroicons-users',
+                            icon:'heroicons-members',
                             name:'Happy clients',
                             number:'+9999',
                         },
@@ -369,6 +390,10 @@ export default defineI18nConfig(() => ({
                 submit:'Register',
                 have_acc:'Do you already have an account ?',
                 login_here:'login from here',
+            },
+            members:{
+              privileges:'Privileges',
+              leave_password:'Leave password empty in case you dont want to update it',
             },
             services:{
                 service:'Forms',

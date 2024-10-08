@@ -4,14 +4,11 @@ import BaseStore from "./BaseStore";
 
 interface DataInterface {
     id: number;
-    ar_name:string | null,
-    en_name:string | null,
-    visibility:string | null,
-    created_at: string;
+    name:string | null,
 }
 
 
-export const SectionsStore = defineStore('sections', {
+export const PrivilegeStore = defineStore('privilegeStore', {
     state: () => ({
         ...new BaseStore<DataInterface>().state,
         loading:false
@@ -20,13 +17,13 @@ export const SectionsStore = defineStore('sections', {
     actions: {
         async get_data_action(filters = '') {
             this.loading = true;
-            this.data = await new BaseStore<DataInterface>().get_data_action('/sections',filters)
+            this.data = await new BaseStore<DataInterface>().get_data_action('/privileges',filters)
             this.loading = false;
         },
         async save_action(data:FormData) {
             this.loading = true;
-            await new BaseStore<DataInterface>().save_action('/sections',data)
-            this.data = await new BaseStore<DataInterface>().get_data_action('/sections','')
+            await  new BaseStore<DataInterface>().save_action('/privileges',data)
+            this.data = await new BaseStore<DataInterface>().get_data_action('/privileges','')
             this.loading = false;
         },
 

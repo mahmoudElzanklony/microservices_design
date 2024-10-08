@@ -140,7 +140,7 @@ function onClick() {
 definePageMeta({
   layout: false,
 })
-/*import { useUserStore} from "~/store/users";
+/*import { useUserStore} from "~/store/members";
 
 const userStore = useUserStore();
 

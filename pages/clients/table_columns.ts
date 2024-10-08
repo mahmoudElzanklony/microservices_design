@@ -37,5 +37,9 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
             key: 'created_at',
             sortable: true
         },
+        {
+            label: '',
+            key: 'privileges',
+        },
     ];
 }

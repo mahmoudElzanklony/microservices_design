@@ -40,10 +40,16 @@ export default class BaseStore <T>{
 
     async save_action(end_point:string = '',filters:FormData){
         try{
-            const response = this.axios.post<{data:T}>(end_point,filters);
-            document.querySelector('.fixed form').reset()
+            const response = this.axios.post<{data:T}>(end_point,filters).then((e)=>{
+                document.querySelector('.fixed form').reset()
+                document.querySelectorAll('.fixed form input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false; // or true if you want to check them
+                });
+            });
+
             return response.data
         }catch (error){
+
             this.state.error = error
         }
 

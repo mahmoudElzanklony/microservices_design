@@ -17,6 +17,7 @@
     "cookie": "^0.6.0",
     "leaflet": "^1.9.4",
     "nuxt": "^3.12.4",
+    "nuxt-time": "^1.0.2",
     "pinia": "^2.2.1",
     "pusher-js": "^8.4.0-rc2",
     "vue": "latest",

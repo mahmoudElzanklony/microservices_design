@@ -69,7 +69,15 @@
       </template>
       <!-- end of services  -->
 
+
+
       <!-- start of client reply reactions -->
+      <template #privileges-data="{ row }">
+        <UDropdown :items="clients_answers_privileges(row)">
+          <UButton color="gray" variant="ghost"
+                   icon="i-heroicons-ellipsis-horizontal-20-solid" />
+        </UDropdown>
+      </template>
       <template v-if="store.data?.data?.length > 0 && store.data?.data[0].latitude" #expand="{ row }">
         <handle-table-client-answer :row="row"></handle-table-client-answer>
       </template>
@@ -107,6 +115,8 @@ import FilterTable from "../dom/FilterTable";
 import process from "node:process";
 import {DeleteStore} from "../store/DeleteItems";
 import HandleTableClientAnswer from "./HandleTableClientAnswer.vue";
+import clients_answers_privileges from "../composables/clients_answers/privileges";
+
 // define variables
 let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','db_table','store_name','row_actions'])
 //---------------- start of store------------

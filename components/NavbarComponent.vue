@@ -33,41 +33,55 @@
 </template>
 
 <script setup lang="ts">
-import {LoginStore} from "../store/auth/login";
-let store = LoginStore()
+import {LogoutStore} from "../store/auth/logout";
+
+let store = LogoutStore()
 import ImageServerComponent from "./ImageServerComponent.vue";
 const localeRoute = useLocaleRoute()
 
 const { $auth } = useNuxtApp()
 const { t } = useI18n();
-const links = [
+console.log($auth);
+let links = [
   {
     label: t('navbar.home'),
     icon: 'i-heroicons-home',
     to: '/'
   },
-  {
-    label: t('navbar.services'),
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/services'
-  },
-  {
-    label: t('navbar.attributes'),
-    icon: 'i-heroicons-chart-bar',
-    to: '/attributes'
-  },
-  /*{
-    label: t('navbar.sections'),
-    icon: 'i-heroicons-command-line',
-    to: '/sections'
-  },*/
-
-  {
-    label: t('navbar.client_reactions'),
-    icon: 'i-heroicons-users',
-    to: '/clients'
-  }
 ]
+
+
+if($auth.role != 'member'){
+  links.push(...[
+    {
+      label: t('navbar.members'),
+      icon: 'i-heroicons-user-group',
+      to: '/members'
+    },
+    {
+      label: t('navbar.services'),
+      icon: 'i-heroicons-square-3-stack-3d',
+      to: '/services'
+    },
+    {
+      label: t('navbar.attributes'),
+      icon: 'i-heroicons-chart-bar',
+      to: '/attributes'
+    },
+    /*{
+      label: t('navbar.sections'),
+      icon: 'i-heroicons-command-line',
+      to: '/sections'
+    },*/
+
+  ])
+}
+
+links.push({
+  label: t('navbar.client_reactions'),
+  icon: 'i-heroicons-check',
+  to: '/clients'
+})
 
 
 </script>

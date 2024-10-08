@@ -1,0 +1,48 @@
+
+import {ServicePrivilegeStore} from "../../store/servicesPrivileges";
+import {icons} from "../../.output/server/chunks/_/icons.mjs";
+import {navigateTo} from "nuxt/app";
+
+export  default async function clients_answers_privileges (row:any) {
+    const { t } = useI18n()
+    const { $auth } = useNuxtApp()
+    let privileges = {
+        reply:{
+            icon:'i-heroicons:chat-bubble-left-right',
+            click:() => navigateTo('/clients/chat/' + row?.id)
+        },
+        markAsEnd: {
+            icon:'i-heroicons:check',
+            click:() => console.log('end chat', row.id)
+        },
+    }
+    let store = ServicePrivilegeStore()
+    if($auth.role == 'member'){
+
+        if(store.data == null || store.data?.length == 0) {
+            await store.get_data_action();
+        }
+        let privileges_with_service_check = store.data.find((e) => e?.service_id == row?.service_id)
+        return privileges_with_service_check.filter(obj => obj.name !== 'view').map(function (q){
+            return {
+                label:t('general.'+obj.name),
+                icon: icons[obj.name]['icon'],
+                click: icons[obj.name]['click'],
+            }
+        })
+    }else {
+        return [
+            [{
+                label: t('general.reply'),
+                icon: privileges['reply']['icon'],
+                click: privileges['reply']['click']
+            }],[{
+                label: t('general.markAsEnd'),
+                icon: privileges['markAsEnd']['icon'],
+                click: privileges['markAsEnd']['click']
+            }]
+        ]
+        
+    }
+
+}

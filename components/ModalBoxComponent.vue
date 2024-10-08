@@ -30,14 +30,16 @@
               {{ i?.label.substr(i?.label.indexOf('https://') + (i?.label.substr(i?.label.indexOf('https://'), i?.label.indexOf(' ', i?.label.indexOf('https://')) - i?.label.indexOf('https://')) || i?.label.substr(str.indexOf('https://'))).length) }}
             </label>
             <label v-else>{{ i?.label }}</label>
-
             <UInput
-                    v-if="i?.type == 'text' && i?.basedOnAttributeName == undefined"
+                    v-if="!(i?.type == 'select' || i?.type == 'table') && i?.basedOnAttributeName == undefined"
                     :name="i?.name"
                     :model-value="Object.keys(edited_row).length > 0 ? edited_row[i['name']]:''"
                     :icon="'i-heroicons-'+i?.icon"
                     size="sm"
-                    :required="i?.required"></UInput>
+                    :type="i?.type"
+                    :placeholder="i.hasOwnProperty('placeholder') ? (typeof (i?.placeholder) == 'string' ? i?.placeholder:(Object.keys(edited_row).length > 0 ? i?.placeholder['update']:i?.placeholder['create'])):''"
+                    :required="typeof (i?.required) == 'string' ? i?.required:(Object.keys(edited_row).length > 0 ? i?.required['update']:i?.required['create'])"
+                    ></UInput>
             <USelectMenu  v-else-if="i?.type == 'select' && i?.basedOnAttributeName == undefined"
                     searchable
                     size="sm"
@@ -51,6 +53,45 @@
                     :placeholder="'Select a '+i?.name" :required="i?.required"
                     :options="i?.options_type == 'api'?select_options_api[i?.name]:i?.options_data"
             ></USelectMenu>
+
+            <!-- start in inputs is table -->
+
+            <div v-else-if="i?.type == 'table'" class="mt-2">
+              <div class="header w-full grid grid-cols-6 gap-2 text-white bg-blue-900 p-2 rounded mb-2">
+                <p v-for="(col,index) in i?.table_columns" :key="index" :class="'text-sm '+(index == 0 ? 'col-span-3':'col-span-1')">
+                  {{ col?.label }}
+                </p>
+              </div>
+              <div class="body w-full">
+                <div class="item grid grid-cols-6 gap-2 mb-2" v-for="(row_data,ind) in table_data"
+                     :key="ind">
+                  <div v-for="(col,index_col) in i?.table_columns" :key="index_col" :class="index_col == 0 ? 'col-span-3':'col-span-1'">
+                    <div v-if="index_col == i?.data_loop_start_index" class="flex space-x-1 items-center">
+                      <input class="w-4 h-4" type="checkbox"
+                             v-model="check_box_privileges[row_data[i?.data_start_loop_body?.value?.id]].status"
+                             :value="true"
+                             >
+                      <span>{{ row_data[i?.data_start_loop_body?.value?.value] }}</span>
+                    </div>
+                    <div v-else>
+                      <label class="inline-flex items-center me-5 cursor-pointer">
+                        <input type="checkbox" class="sr-only peer"
+                               :checked="check_box_privileges[row_data[i?.data_start_loop_body?.value?.id]].data?.find((e) => e == i?.table_columns[index_col]['id'])"
+                               :disabled="check_box_privileges[row_data[i?.data_start_loop_body?.value?.id]].status == false"
+
+                               :name="'item['+row_data[i?.data_start_loop_body?.value?.id]+']'+'[]'"
+                               v-model="check_box_privileges[row_data[i?.data_start_loop_body?.value?.id]].data"
+                               :value="i?.table_columns[index_col]['id']">
+                        <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                      </label>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- end in inputs is table -->
             <div class="mt-3"
                  v-if="i?.basedOnAttributeName != undefined && i?.basedOnAttributeName == inputs[index-1]?.name && selected_options_inputs[i?.basedOnAttributeName] == i?.basedOnAttributeValue">
               <div class="flex justify-between space-x-1 items-center mb-2"
@@ -62,6 +103,7 @@
                     v-model="dynamic_inputs[i?.basedOnAttributeValue][key][lang?.name.replace('[]','')]"
                     :icon="'i-heroicons-'+lang?.icon"
                     size="sm"
+                    :type="i?.type ?? 'text'"
                     :required="i?.required"></UInput>
                 <UButton
                          v-if="key > 0"
@@ -89,8 +131,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref, watch, defineEmits, reactive} from "vue";
+import {ref, watch, defineEmits, reactive, onMounted} from "vue";
 import dynamic_import from "../mixins/dynamic_import";
+import getDataFromStoreDynamicBasedOnTable from "../composables/general/getDataFromStoreDynamicBasedOnTable";
 
 const props = defineProps({
   isOpen: Boolean,
@@ -100,14 +143,20 @@ const props = defineProps({
 });
 let dynamic_inputs = reactive({});
 import create_dynamic_input from "../composables/Attribute/useSelectOption";
+import {keys} from "pusher-js/types/src/core/utils/collections";
 let status = ref(false) // for close , open modal
 const emit = defineEmits(['update:isOpen']);
 const { t } = useI18n();
 
+let table_data = ref([]);
+let check_box_privileges = reactive({});
 
 
 
-
+try {
+//const response = await $axios.post('/deleteitem',formData);
+  store.get_data_action()
+}catch (e){}
 
 let selected_options_inputs = reactive({});
 let select_options_api = reactive({}); // to get data from api and put it at select
@@ -128,7 +177,33 @@ watch(() => props.isOpen, (newVal) => {
 });
 watch(() => props.edited_row, (newVal) => {
   selections_options()
+// watch checkbox services privileges from edited row
+  console.log('----------------------controls----------------')
+  if(table_data.value && table_data.value.length > 0) {
+    for (let ser of table_data.value) {
+      check_box_privileges[ser?.id] = {
+        status:false,
+        data:[]
+      }
+    }
+  }
+  if(Object.keys(check_box_privileges).length > 0){
+      for(let item of Object.keys(check_box_privileges)){
+        let controls = props?.edited_row?.services_privileges?.find((e) => e?.service_id == item)?.controls;
+        if(controls){
+          check_box_privileges[item]['status'] = true;
+          check_box_privileges[item]['data'] = [...controls.map((e) => e?.privilege?.id)]
+        }
+      }
+  }
 });
+watch(() => props.inputs, async (newVal) => {
+
+  table_data.value = await getDataFromStoreDynamicBasedOnTable(newVal)
+}, { immediate: true } );
+
+
+
 
 
 
@@ -142,6 +217,7 @@ async function save(){
     let formData = new FormData(event.target);
 
     await props.store.save_action(formData);
+    //closeModal()
   }catch (e){
     console.log(e)
   }
@@ -167,6 +243,9 @@ async function selections_options(){
     }
   }
 }
+
+
+
 
 /*
 *
