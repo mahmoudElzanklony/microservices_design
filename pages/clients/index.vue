@@ -42,10 +42,20 @@ import createTableColumns from "./table_columns";
 import {ClientsStore} from "../../store/clients";
 import ActionsTable from "../../fixed_data/ActionsTable";
 import {ServicesStore} from "../../store/services";
+import {useRoute} from "vue-router";
 import {ref} from "vue";
 
 const { t } = useI18n();
+let router = useRoute();
 
+if(router.query.service_id){
+  try{
+    await ClientsStore().authorize_user(router.query.service_id)
+  }catch (e){
+    console.log('saaaaaaaaaaaad')
+    console.log(e.response)
+  }
+}
 const columns = createTableColumns(t)
 const selected = ref()
 const serviceStore = ServicesStore()

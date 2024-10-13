@@ -38,15 +38,7 @@
                        :value="serviceStore.item?.id">
                 <div class="mb-5" v-for="(i,index) in inputs" :key="index">
                   <label class="mb-3 text-cool-500">{{ i?.label }}</label>
-
-                  <UInput
-                      v-if="i?.type == 'text'"
-                      :name="i?.name"
-                      v-model="general_info[i?.name]"
-
-                      :icon="'i-heroicons-'+i?.icon"
-                      size="sm"
-                      required></UInput>
+                  <InputOrSelectComponent :i="i" :selected_options_inputs="{[i.name]:serviceStore.item[i.name]}" :edited_row="serviceStore.item"></InputOrSelectComponent>
 
                 </div>
 
@@ -133,6 +125,7 @@
   import {useTitlesStyles} from "../../../composables/services_style/useTitlesStyles";
   import {useCheckServiceBelongToOwner} from "../../../composables/services_style/useCheckServiceBelongToOwner";
   import FinalServiceComponent from "../../../components/FinalServiceComponent.vue";
+  import InputOrSelectComponent from "../../../components/InputOrSelectComponent.vue";
 
   let { inputs, styles, main_inputs_up_down,sections_attr_ids, section_attributes_up_down,
     fetchSections } = useFormManagement();
@@ -230,7 +223,7 @@
      document.querySelector('pre.arabic').textContent =
          '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/ar/services/embedded?id='+router?.params?.id+'" width="100%" height="450" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
     document.querySelector('pre.english').textContent =
-        '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/en/services/embedded?id='+router?.params?.id+'" width="100%"  height="450" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+        '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/services/embedded?id='+router?.params?.id+'" width="100%"  height="450" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
   })
   const {  $Toast } = useNuxtApp();
 

@@ -35,6 +35,24 @@ export function createFormInputs(t: ReturnType<typeof useI18n>['t']) {
             type:'text',
             icon:'information-circle',
             required:false,
+        },
+        {
+            label: t('attributes.type'),
+            name: 'type',
+            type:'select',
+            options_type:'fixed',
+            multiple:false,
+            required:true,
+            options_data:[
+                {
+                    id:'contact',
+                    name:t('services.contact'),
+                },
+                {
+                    id:'in_mail',
+                    name:t('services.in_mail'),
+                }
+            ]
         }
     ];
 }

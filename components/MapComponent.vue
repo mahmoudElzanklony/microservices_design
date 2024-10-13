@@ -18,19 +18,21 @@ onMounted(async () => {
     // Example lat and lon
 
     const zoomLevel = 13
+    if(props.lat && props.lon) {
+      // Initialize the map on client-side
+      const map = await L.map(mapElement.value).setView([props.lat, props.lon], zoomLevel)
 
-    // Initialize the map on client-side
-    const map = await L.map(mapElement.value).setView([props.lat, props.lon], zoomLevel)
+      // Set up map tiles from OpenStreetMap
+      await L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map)
 
-    // Set up map tiles from OpenStreetMap
-    await L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map)
+      // Add a marker
+      await L.marker([props.lat, props.lon]).addTo(map).openPopup()
+      document.querySelector('table thead tr th:nth-of-type(4)').style.width = '100%'
 
-    // Add a marker
-    await L.marker([props.lat, props.lon]).addTo(map).openPopup()
+    }
 
-    document.querySelector('table thead tr th:nth-of-type(4)').style.width = '100%'
   }
 })
 </script>

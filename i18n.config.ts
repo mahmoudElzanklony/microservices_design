@@ -236,6 +236,9 @@ export default defineI18nConfig(() => ({
                 contact:'التواصل',
                 terms:'شروط الاستخدام',
             },
+            tips:{
+                upload:'اقصي حجم للملف المرفوع هو 30 ميجا'
+            },
             welcome:'مرحبا',
         },
         en: {
@@ -468,6 +471,9 @@ export default defineI18nConfig(() => ({
                 contact:'Contact',
                 terms:'Terms',
 
+            },
+            tips:{
+                upload:'max uploaded file is 30M'
             },
             welcome: 'Welcome'
         },

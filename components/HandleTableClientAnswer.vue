@@ -32,6 +32,7 @@
       </div>
     </div>
     <MapComponent :lat="row?.latitude" :lon="row?.longitude" />
+
   </div>
 
 </template>
