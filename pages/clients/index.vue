@@ -44,19 +44,29 @@ import ActionsTable from "../../fixed_data/ActionsTable";
 import {ServicesStore} from "../../store/services";
 import {useRoute} from "vue-router";
 import {ref} from "vue";
+import {MemberPrivilegesStore} from "../../store/MemberPrivileges";
 
 const { t } = useI18n();
 let router = useRoute();
+let store = MemberPrivilegesStore()
 
+console.log(router.query)
+console.log(router.query.service_id)
 if(router.query.service_id){
   try{
-    await ClientsStore().authorize_user(router.query.service_id)
-  }catch (e){
-    console.log('saaaaaaaaaaaad')
-    console.log(e.response)
+    await ClientsStore().authorize_user()
+  }catch (e){}
+
+
+  if(store.data == null){
+    await store.get_data_action('?service_id='+router.query.service_id)
   }
+  console.log(store.data)
+
 }
-const columns = createTableColumns(t)
+const columns = await createTableColumns(t)
+
+
 const selected = ref()
 const serviceStore = ServicesStore()
 await serviceStore.get_data_action('?limit=9999');

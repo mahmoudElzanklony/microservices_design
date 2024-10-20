@@ -31,14 +31,20 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
             sortable: true
         },
         {
-            label: t('general_inputs.created_at'),
-            key: 'created_at',
+            label: t('clients.answers'),
+            key: 'answers_url',
             sortable: true
         },
         {
-            key: 'actions'
+            label: t('general_inputs.created_at'),
+            key: 'created_at',
+            sortable: true
         }
     );
-
+    if($auth && $auth?.role != 'member'){
+        arr.push({
+            key: 'actions',
+        });
+    }
     return arr;
 }

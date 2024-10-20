@@ -70,7 +70,7 @@ if(!$auth){
   links[1].push({
     label: t('general.dashboard'),
     icon: 'i-heroicons-rocket-launch',
-    to: localeRoute({ path:($auth?.role == 'member'?'/clients':'/services') }),
+    to: localeRoute({ path:'/services' }),
     click:() => {}
   },{
     label: t('notifications.name'),

@@ -28,8 +28,7 @@ onMounted(async () => {
       }).addTo(map)
 
       // Add a marker
-      await L.marker([props.lat, props.lon]).addTo(map).openPopup()
-      document.querySelector('table thead tr th:nth-of-type(4)').style.width = '100%'
+      L.marker([props.lat, props.lon]).addTo(map).openPopup()
 
     }
 

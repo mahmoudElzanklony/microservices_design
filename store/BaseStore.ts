@@ -20,6 +20,7 @@ export default class BaseStore <T>{
 
     async get_data_action(end_point:string = '', filters:string = ''){
         try{
+            console.log(end_point+filters)
             const response = await this.axios.get<{data:T}>(end_point+filters)
             return response?.data;
         }catch (error){

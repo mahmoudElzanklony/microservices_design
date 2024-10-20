@@ -48,6 +48,11 @@ let links = [
     icon: 'i-heroicons-home',
     to: '/'
   },
+  {
+    label: t('navbar.services'),
+    icon: 'i-heroicons-square-3-stack-3d',
+    to: '/services'
+  },
 ]
 
 
@@ -57,11 +62,6 @@ if($auth.role != 'member'){
       label: t('navbar.members'),
       icon: 'i-heroicons-user-group',
       to: '/members'
-    },
-    {
-      label: t('navbar.services'),
-      icon: 'i-heroicons-square-3-stack-3d',
-      to: '/services'
     },
     {
       label: t('navbar.attributes'),

@@ -23,6 +23,7 @@ export default defineI18nConfig(() => ({
               main_info:'المعلومات الاساسية',
               total:'الأجمالي',
               press_here:'اضغط هنا',
+              unknown:'غير معروف',
               app_name:'MicroServices',
               dashboard:'لوحه التحكم',
               view:'عرض',
@@ -223,6 +224,7 @@ export default defineI18nConfig(() => ({
                 file:'ملف',
             },
             clients:{
+              answers:'الاجابات',
               answers_count:'عدد الاجابات',
               location:'الموقع',
               longitude:'خطوط الطول',
@@ -262,6 +264,7 @@ export default defineI18nConfig(() => ({
                 main_info:'General info',
                 total:'Total',
                 press_here:'Press here',
+                unknown:'unknown',
                 app_name:'MicroServices',
                 dashboard:'Dashboard',
                 view:'View',
@@ -458,6 +461,7 @@ export default defineI18nConfig(() => ({
                 icon_txt:'click on  https://icones.js.org/collection/heroicons service and copy the icon name into the field',
             },
             clients:{
+                answers:'Answers',
                 answers_count:'Answers count',
                 longitude:'Longitude',
                 location:'Location',

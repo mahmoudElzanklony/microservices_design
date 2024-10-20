@@ -1,7 +1,7 @@
 // stores/user.ts
 import { defineStore } from 'pinia';
 import BaseStore from "./BaseStore";
-import {useRoute} from "vue-router";
+import { useRoute } from 'vue-router'; // Import useRoute
 
 interface DataInterface {
     id: number;
@@ -29,34 +29,49 @@ export const ClientsStore = defineStore('clients', {
     actions: {
         async get_data_action(filters = '') {
             this.loading = true;
-            let service_id = useRoute().query?.service_id
+            let  _route  = useRoute() // Access the route from NuxtApp
+            if(_route == undefined){
+                _route =  useNuxtApp()._route
+            }
+            let service_id = _route.query?.service_id
             if(service_id){
-                filters = filters.length == 0 ? '?service_id='+service_id :'';
+                if(filters.length == 0){
+                    filters = '?service_id='+service_id;
+                }else{
+                    filters = filters + (filters.indexOf('service_id') == -1 ? '&service_id='+service_id:'')
+                }
             }
             this.data = await new BaseStore<DataInterface>().get_data_action('/services-clients',filters)
             this.loading = false;
         },
-        async authorize_user() {
+        async authorize_user(data_passed:object = {}) {
             this.loading = true;
-            let service_id = useRoute().query?.service_id
+            let  _route  = useRoute() // Access the route from NuxtApp
+            if(_route == undefined){
+                _route =  useNuxtApp()._route
+            }
+            let service_id = _route.query?.service_id
+            console.log(service_id)
+            console.log(_route)
             if(service_id){
                 let data = new FormData();
                 data.append('service_id',service_id);
+                console.log(data_passed)
+                if(data_passed && Object.keys(data_passed).length > 0){
+                    for(let k of Object.entries(data_passed)){
+                        data.append(k[0],k[1]);
+                    }
+                }
                 const { $axios } = useNuxtApp();
-
                 try {
                     const response = await $axios.post('/services-clients/authorize', data);
                     if (response.data.status === false) {
-                        // Perform navigation if the status is false
-                        await navigateTo('/'); // Ensure this is awaited
+                        window.location = '/'
                     }
                 } catch (error) {
-                    console.error('Authorization error:', error);
-                    // You might want to navigate on error too
                     await navigateTo('/')
                 }
             }
-
             this.loading = false;
         },
         async get_specific_one(id = '') {

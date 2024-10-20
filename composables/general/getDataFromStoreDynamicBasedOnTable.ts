@@ -3,8 +3,6 @@
 import dynamic_import from "../../mixins/dynamic_import";
 
 export default async function (inputs:any) {
-    console.log(inputs)
-    console.log(Array.isArray(inputs))
     let data = [];
     if(inputs) {
         // check if in table and you want to get data from api
