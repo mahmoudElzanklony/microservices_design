@@ -1,0 +1,20 @@
+buy product
+
+1 - make order
+2 - decrease items mout of stock
+3 - send notificon to seller , admin
+4 - send bill to client mail 
+
+
+class ProductOrderBuilder{
+   public function stock_process(){
+     return this; 
+   }
+   public function make_order(){
+     return this; 
+   }
+  
+}
+
+$obj = new ProductOrderBuilder();
+$obj->stock_process()->make_order()->

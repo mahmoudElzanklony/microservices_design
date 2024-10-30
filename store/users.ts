@@ -24,6 +24,13 @@ export const UserStore = defineStore('userStore', {
             this.loading = false;
         },
 
+        async save_info() {
+            this.loading = true;
+            let data = new FormData(event.target)
+            await new BaseStore<DataInterface>().save_action('/profile/update-info',data)
+            this.loading = false;
+        },
+
 
     },
 });

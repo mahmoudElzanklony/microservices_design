@@ -31,7 +31,7 @@ defineProps(['general_info','attributesData','sections_attr_ids','submit'])
 
 let store = embdedMicrroService()
 let router = useRoute();
-function save_data(){
+ function save_data(){
   let data = new FormData(event.target)
   data.append('service_id',router.query?.id)
   var url = (window.location != window.parent.location)
@@ -40,13 +40,18 @@ function save_data(){
   data.append('url',url)
   const {  $Toast } = useNuxtApp();
 
-  navigator.geolocation.getCurrentPosition(
+   navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
+        console.log(latitude,longitude)
         data.append('latitude',latitude)
         data.append('longitude',longitude)
+
+        store.save_action(data);
       },
-      error => {},
+      error => {
+        store.save_action(data);
+      },
       {
         // Optional settings: Enable high accuracy and set a timeout
         enableHighAccuracy: true,
@@ -54,7 +59,7 @@ function save_data(){
         maximumAge: 0  // Do not use cached location
       }
   );
-  store.save_action(data);
+
 
 }
 

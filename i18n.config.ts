@@ -137,6 +137,7 @@ export default defineI18nConfig(() => ({
                 statistics:'الأحصائيات',
                 notifications:'الاشعارات',
                 members:'الأعضاء',
+                settings:'الاعدادت',
                 hi:'مرحبا'
             },
             delete:{
@@ -242,6 +243,11 @@ export default defineI18nConfig(() => ({
                 upload:'اقصي حجم للملف المرفوع هو 30 ميجا'
             },
             welcome:'مرحبا',
+            tickets:{
+                chat:{
+                    ended:'تم اغلاق المحادثة لذا لن تستطيع ارسال او استقبال اي رسائل اخري'
+                }
+            }
         },
         en: {
             errors:{
@@ -306,6 +312,7 @@ export default defineI18nConfig(() => ({
                 statistics:'Statistics',
                 notifications:'Notifications',
                 members:'Members',
+                settings:'Settings',
                 hi:'Hi'
             },
             home:{
@@ -478,6 +485,11 @@ export default defineI18nConfig(() => ({
             },
             tips:{
                 upload:'max uploaded file is 30M'
+            },
+            tickets:{
+                chat:{
+                    ended:'Ticket chat has been ended so you cant send or receive any messages'
+                }
             },
             welcome: 'Welcome'
         },

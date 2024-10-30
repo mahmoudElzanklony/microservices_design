@@ -84,7 +84,7 @@
                    icon="i-heroicons-ellipsis-horizontal-20-solid" />
         </UDropdown>
       </template>
-      <!-- start of client reply reactions -->
+
 
       <template #answers-data="{ row , column }">
         <ClientAnswerColumnComponent :row="row" :column="column"></ClientAnswerColumnComponent>
@@ -142,11 +142,14 @@ const config = useRuntimeConfig();
 const add_delete_actions = tableAddDeleteActionsControl();
 console.log(add_delete_actions)
 // define variables
-let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','db_table','store_name','row_actions'])
+let props = defineProps(['title','columns','data_row_relations','modal_inputs','table','db_table','store_name','row_actions','stop_store_action'])
+
 //---------------- start of store------------
 let store = props.store_name()
 let delete_store = DeleteStore()
-await store.get_data_action();
+if(props.stop_store_action != 'stop') {
+  await store.get_data_action();
+}
 
 
 

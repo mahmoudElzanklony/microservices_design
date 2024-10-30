@@ -38,7 +38,8 @@
                        :value="serviceStore.item?.id">
                 <div class="mb-5" v-for="(i,index) in inputs" :key="index">
                   <label class="mb-3 text-cool-500">{{ i?.label }}</label>
-                  <InputOrSelectComponent :i="i" :selected_options_inputs="{[i.name]:serviceStore.item[i.name]}" :edited_row="serviceStore.item"></InputOrSelectComponent>
+                  <InputOrSelectComponent :i="i" :selected_options_inputs="{[i.name]:serviceStore.item[i.name]}"
+                                          :edited_row="serviceStore.item"></InputOrSelectComponent>
 
                 </div>
 
@@ -210,7 +211,7 @@
       let data = new FormData(event.target);
 
       for (let i of sections_attr_ids) {
-        data.append('type[]', AttributeStore.data?.data.find((e) => e.id === i['attribute_id'])?.type)
+        data.append('types[]', AttributeStore.data?.data.find((e) => e.id === i['attribute_id'])?.type)
       }
      // data.append('style', JSON.stringify(style_form_service_data));
       data.append('style', JSON.stringify(styleFormServiceData?.value));

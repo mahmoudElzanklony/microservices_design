@@ -48,40 +48,39 @@ let links = [
     icon: 'i-heroicons-home',
     to: '/'
   },
-  {
-    label: t('navbar.services'),
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/services'
-  },
 ]
 
-
-if($auth.role != 'member'){
+if(!($auth.role == 'client' || $auth.role == 'member')){
   links.push(...[
-    {
-      label: t('navbar.members'),
-      icon: 'i-heroicons-user-group',
-      to: '/members'
-    },
-    {
-      label: t('navbar.attributes'),
-      icon: 'i-heroicons-chart-bar',
-      to: '/attributes'
-    },
-    /*{
-      label: t('navbar.sections'),
-      icon: 'i-heroicons-command-line',
-      to: '/sections'
-    },*/
-
-  ])
+      {
+        label: t('navbar.services'),
+        icon: 'i-heroicons-square-3-stack-3d',
+        to: '/services'
+      },
+      {
+        label: t('navbar.members'),
+        icon: 'i-heroicons-user-group',
+        to: '/members'
+      },
+      {
+        label: t('navbar.attributes'),
+        icon: 'i-heroicons-chart-bar',
+        to: '/attributes'
+      },
+    ]
+  )
 }
+
 
 links.push({
   label: t('navbar.client_reactions'),
   icon: 'i-heroicons-check',
   to: '/clients'
-})
+},{
+  label: t('navbar.settings'),
+  icon: 'i-heroicons-cog-8-tooth',
+  to: '/settings'
+},)
 
 
 </script>
