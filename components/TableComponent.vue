@@ -68,6 +68,12 @@
           <span>{{ row?.type.replace('_',' ') }}</span>
         </div>
       </template>
+      <template #user_privileges-data="{ row }">
+        <div class="flex space-x-2 items-center">
+          <nuxt-link :to="'/privileges?service_id='+row?.id" class="text-primary">{{ $t('general.press_here') }}</nuxt-link>
+        </div>
+      </template>
+
       <template #answers_url-data="{ row }">
         <div class="flex space-x-2 items-center">
           <nuxt-link :to="'/clients?service_id='+row?.id" class="text-primary">{{ $t('general.press_here') }}</nuxt-link>

@@ -6,7 +6,7 @@
         :columns="columns"
         :data_row_relations="[]"
         :modal_inputs="box_inputs"
-        table="sections"
+        table="attributes"
         :row_actions="ActionsTable"
         :store_name="AttributesStore"
 

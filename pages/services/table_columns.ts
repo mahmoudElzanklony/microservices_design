@@ -36,6 +36,11 @@ export default function createTableColumns(t: ReturnType<typeof useI18n>['t']) {
             sortable: true
         },
         {
+            label: t('members.privileges'),
+            key: 'user_privileges',
+            sortable: true
+        },
+        {
             label: t('general_inputs.created_at'),
             key: 'created_at',
             sortable: true
