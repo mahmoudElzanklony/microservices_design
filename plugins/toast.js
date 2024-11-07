@@ -1,13 +1,16 @@
 import { defineNuxtPlugin } from '#app';
-import Toast, { useToast } from 'vue-toastification';
+import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 
 export default defineNuxtPlugin(nuxtApp => {
-    nuxtApp.vueApp.use(Toast);
     const toastOptions = {
-        timeout: 40000,  // 4 seconds
+        timeout: 40000,  // 40 seconds
     };
 
+    // Set up the plugin
     nuxtApp.vueApp.use(Toast, toastOptions);
-    nuxtApp.provide('Toast', useToast());
+
+    // Provide the useToast function
+    const useToast = nuxtApp.vueApp.config.globalProperties.$toast;
+    nuxtApp.provide('toast', useToast);
 });
