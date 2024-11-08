@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
 
-    "start": "node .output/server/index.mjs",
+    "start": "PORT=4000 npm run start",
     "deploy": "pm2 start npm --name microservices.com -- start"
   },
   "dependencies": {
