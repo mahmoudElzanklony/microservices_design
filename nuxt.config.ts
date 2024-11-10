@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui", "@nuxtjs/i18n", "@pinia/nuxt", 'nuxt-time'],
   plugins: [
     '~/plugins/axios',
-    //'~/plugins/toast',
+    '~/plugins/toast',
     '~/plugins/auth',
     '~/plugins/pusher'
   ],

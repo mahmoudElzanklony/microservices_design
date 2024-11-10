@@ -1,6 +1,7 @@
 // plugins/axios.js
 import axios from 'axios';
-import { useToast } from 'vue-toastification'
+import { useToast } from 'vue-toastification';
+
 
 export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig();
@@ -14,9 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         },
     });
 
-    const Toast = useToast()
-   // console.log(Toast.warning("aaaaaaaaaaa error"))
-    console.log(Toast.error("aaaaaaaaaaa error"))
+    const Toast = useToast();
+
 
 
     // Optional: Add interceptors for request/response
