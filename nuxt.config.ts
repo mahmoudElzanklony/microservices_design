@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       port: 5000
     }
   },
+  build : {
+    transpile: ['vue-toastification']
+  },
   pages: true,
   app: {
     head: {
