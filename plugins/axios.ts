@@ -1,5 +1,6 @@
 // plugins/axios.js
 import axios from 'axios';
+import { useToast } from 'vue-toastification'
 
 export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig();
@@ -12,6 +13,11 @@ export default defineNuxtPlugin((nuxtApp) => {
             'Content-Type': 'application/json',
         },
     });
+
+    const Toast = useToast()
+   // console.log(Toast.warning("aaaaaaaaaaa error"))
+    console.log(Toast.error("aaaaaaaaaaa error"))
+
 
     // Optional: Add interceptors for request/response
     axiosInstance.interceptors.request.use((config) => {
@@ -53,18 +59,21 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     axiosInstance.interceptors.response.use((response) => {
         // You can modify the response here
-        const Toast = nuxtApp.$Toast;
+        //const Toast = nuxtApp.$Toast;
+
         if(response?.data?.message){
-            Toast.success(response?.data?.message);
+            Toast.success( response?.data?.message)
         }
+
         return response;
     }, (error) => {
-        const Toast = nuxtApp.$Toast;
+
         const router = useRouter();
 
         if(error?.response?.data && error?.response?.data.hasOwnProperty('message') &&  error?.response?.data.message.indexOf('Unauthenticated') >= 0){
             router.push('/auth/login');
         }
+
         if(typeof error?.response?.data?.errors == 'string'){
             Toast.error(error?.response?.data?.errors)
         }else{
