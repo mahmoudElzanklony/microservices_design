@@ -12,7 +12,9 @@
 
     </div>
     <input type="hidden" name="attribute_id[]" :value="i?.attribute_id">
-    <RecaptchaComponent class="mt-3 w-full" v-if="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'recaptcha'"></RecaptchaComponent>
+    <RecaptchaComponent class="mt-3 w-full"
+                        :stop_execute="!!submit"
+                        v-if="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'recaptcha'"></RecaptchaComponent>
     <UInput v-else-if="!(attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'select')"
             :style="{ outline: 'none' }"
             :type="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type"
