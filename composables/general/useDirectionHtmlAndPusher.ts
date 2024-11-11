@@ -2,7 +2,7 @@
 import { onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useNuxtApp } from '#app'
-import { useToast } from 'vue-toastification';R
+import { useToast } from 'vue-toastification';
 export default function useLocaleAndPusherMixin() {
     const { locale } = useI18n()
     const { $pusher, $auth } = useNuxtApp()
