@@ -1,8 +1,8 @@
 <template>
-  <div class="input-data mb-2"  v-for="(i,index) in sections_attr_ids" :key="index"
-       :class="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'recaptcha'?'!w-full':''">
-    <div class="flex items-center space-x-2">
-      <label v-if="i?.attribute_id != null">{{ attributes_data.find((e) => e.id ==  i['attribute_id'])?.label }}</label>
+  <div v-for="(i,index) in sections_attr_ids" :key="index"
+       :class="'input-data mb-2 '+(attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'recaptcha'?'!w-full':'')">
+    <div class="flex items-center space-x-2" >
+      <label v-if="i?.attribute_id != null">{{ attributes_data.find((e) => e.id ==  i['attribute_id'])[locale+'_label'] }}</label>
       <UTooltip v-if="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'file'"
                 :popper="{ placement: 'right' }"
                 :text="$t('tips.upload')" >
@@ -50,6 +50,7 @@
 
   let props = defineProps(['sections_attr_ids','attributes_data','submit'])
   let selected = reactive([]);
+  const { locale, setLocale  } = useI18n()
   for(let i in props.sections_attr_ids){
     selected[i] = '';
   }
