@@ -127,6 +127,8 @@
   import {useCheckServiceBelongToOwner} from "../../../composables/services_style/useCheckServiceBelongToOwner";
   import FinalServiceComponent from "../../../components/FinalServiceComponent.vue";
   import InputOrSelectComponent from "../../../components/InputOrSelectComponent.vue";
+  import {useToast} from "vue-toastification";
+
 
   let { inputs, styles, main_inputs_up_down,sections_attr_ids, section_attributes_up_down,
     fetchSections } = useFormManagement();
@@ -226,15 +228,15 @@
     document.querySelector('pre.english').textContent =
         '<iframe allow="geolocation;" src="'+config.public.clientUrl+'/services/embedded?id='+router?.params?.id+'" width="100%"  height="450" style="border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
   })
-  const {  $Toast } = useNuxtApp();
+  const Toast = useToast();
 
   function copyToClipboard() {
     let el = event.target.parentElement.nextElementSibling;
 
     navigator.clipboard.writeText(el.textContent).then(() => {
-      $Toast.success('copied successfully');
+      Toast.success('copied successfully');
     }).catch(err => {
-      $Toast.error('Failed to copy text: ', err);
+      Toast.error('Failed to copy text: ', err);
     });
   }
 
