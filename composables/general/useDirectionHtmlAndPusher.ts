@@ -2,11 +2,11 @@
 import { onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useNuxtApp } from '#app'
-
+import { useToast } from 'vue-toastification';R
 export default function useLocaleAndPusherMixin() {
     const { locale } = useI18n()
-    const { $pusher, $Toast, $auth } = useNuxtApp()
-
+    const { $pusher, $auth } = useNuxtApp()
+    let Toast = useToast()
     // Function to update the HTML 'dir' attribute based on the current locale
     const setHtmlDirection = (currentLocale) => {
         const isRtl = ['ar', 'he', 'fa'].includes(currentLocale) // Adjust for RTL languages
@@ -30,7 +30,7 @@ export default function useLocaleAndPusherMixin() {
             if (output && output.message) {
                 if (output.user_id) {
                     if (output.user_id === $auth?.id) {
-                        $Toast.success(output.message)
+                        Toast.success(output.message)
                     }
                 }
             }
