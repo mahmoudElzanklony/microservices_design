@@ -27,7 +27,8 @@ export const UserStore = defineStore('userStore', {
         async save_info() {
             this.loading = true;
             let data = new FormData(event.target)
-            await new BaseStore<DataInterface>().save_action('/profile/update-info',data)
+            let res = await new BaseStore<DataInterface>().save_action('/profile/update-info',data)
+            document.cookie = `user=${JSON.stringify(res?.data)}; path=/`;
             this.loading = false;
         },
 

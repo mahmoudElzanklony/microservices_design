@@ -45,7 +45,6 @@ let form_inputs = createFormInputs(t)
 
 
 
-
 </script>
 
 

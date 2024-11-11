@@ -17,7 +17,7 @@
       <div class="flex items-center space-x-1 justify-center my-4">
         <p class="text-lg">{{ $t('navbar.hi') }}</p>
         <p class="text-lg font-bold text-green-600">{{ $auth?.username }}</p>
-        <img class="w-7" src="/icons/hand.svg">
+        <img class="w-7" src="/icons/hand.png">
       </div>
       <UButton
           icon="i-heroicons-arrow-left-start-on-rectangle-solid"
@@ -41,7 +41,7 @@ const localeRoute = useLocaleRoute()
 
 const { $auth } = useNuxtApp()
 const { t } = useI18n();
-console.log($auth);
+
 let links = [
   {
     label: t('navbar.home'),
