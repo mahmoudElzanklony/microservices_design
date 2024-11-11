@@ -30,10 +30,11 @@
       },
     },
     mounted() {
+      this.loadRecaptcha()
       if(this.stop_execute){
         return false;
       }
-      this.loadRecaptcha()
+
       document.querySelector('*[type="submit"]').setAttribute('disabled',true);
       var com = this;
       window.verify_recaptha = function (){
