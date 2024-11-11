@@ -10,6 +10,7 @@
 <script>
   export default {
     name:'RecaptchaComponent',
+    props:['stop_execute'],
     methods:{
       loadRecaptcha() {
         const script = document.createElement('script');
@@ -29,6 +30,9 @@
       },
     },
     mounted() {
+      if(this.stop_execute){
+        return false;
+      }
       this.loadRecaptcha()
       document.querySelector('*[type="submit"]').setAttribute('disabled',true);
       var com = this;

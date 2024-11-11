@@ -35,6 +35,7 @@
                   size="sm"
                   required></UInput>
         </div>
+        <RecaptchaComponent></RecaptchaComponent>
         <div class="mb-2.5">
           <UButton :loading="store.loading" type="submit" block>
             {{ $t('register.submit') }}
@@ -51,6 +52,7 @@
 
 <script setup lang="ts">
 import {RegisterStore} from "../../store/auth/register";
+import RecaptchaComponent from "../../components/RecaptchaComponent.vue";
 
 const store = RegisterStore()
 definePageMeta({

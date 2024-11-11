@@ -18,7 +18,7 @@
             :type="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type"
             :name="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type != 'file' ?'answer['+index+']':'answer['+index+']'"
             v-model="selected[index]"
-            :required="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.name == 'email'"
+            :required="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.name == 'email' && submit == true"
             :icon="'i-heroicons-'+(attributes_data.find((e) =>  e?.id == i['attribute_id'])?.icon)"
             size="sm"
     ></UInput>
