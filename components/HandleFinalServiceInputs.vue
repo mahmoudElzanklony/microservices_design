@@ -11,7 +11,7 @@
       </UTooltip>
 
     </div>
-    <input type="hidden" name="attribute_id[]" :value="i?.attribute_id">
+    <input v-if="submit" type="hidden" name="attribute_id[]" :value="i?.attribute_id">
     <RecaptchaComponent class="mt-3 w-full"
                         :stop_execute="submit == undefined"
                         v-if="attributes_data.find((e) =>  e?.id == i['attribute_id'])?.type == 'recaptcha'"></RecaptchaComponent>
